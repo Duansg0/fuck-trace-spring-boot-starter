@@ -1,14 +1,20 @@
 package com.talkee.trace.interceptor;
 
+import com.baomidou.mybatisplus.core.override.PageMapperProxy;
 import com.talkee.trace.base.AbstractTraceInterceptor;
 import com.talkee.trace.model.DalDigestModel;
+import com.talkee.trace.util.AopTargetUtil;
 import com.talkee.trace.util.LoggerFormatUtil;
 import lombok.Data;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.AdvisedSupport;
+import org.springframework.aop.framework.AopProxy;
 import org.springframework.aop.support.AopUtils;
+
+import java.lang.reflect.Field;
 
 @Data
 public class DaoDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor {
@@ -33,6 +39,10 @@ public class DaoDigestInterceptor extends AbstractTraceInterceptor implements Me
             return result;
         } finally {
             try {
+                //没有解决mybatis-plus
+                if(AopUtils.getTargetClass(invocation.getThis()).newInstance() instanceof PageMapperProxy){
+                    System.out.println(1);
+                }
                 String namespace =  AopUtils.getTargetClass(invocation.getThis()).getName();
                 String actionName = invocation.getMethod().getName();
                 String url = namespace + "." + actionName;

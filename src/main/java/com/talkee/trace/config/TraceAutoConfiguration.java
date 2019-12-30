@@ -17,6 +17,7 @@ public class TraceAutoConfiguration {
     @Bean(name = "DaoDigestInterceptor")
     public DefaultPointcutAdvisor defaultPointcutAdvisor(TraceProperties traceProperties) {
         DaoDigestInterceptor interceptor = new DaoDigestInterceptor();
+        interceptor.setAppName(traceProperties.getAppName());
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
         pointcut.setExpression(String.format(execution,traceProperties.getTraceExecution()));
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();

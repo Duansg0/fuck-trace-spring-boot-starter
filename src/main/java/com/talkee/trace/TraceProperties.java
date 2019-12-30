@@ -25,4 +25,8 @@ public class TraceProperties {
      * @desc 摘要日志开关,默认开启状态
      */
     private boolean digestLogOpen = true;
+    /**
+     * @desc 服务名称
+     */
+    private String appName ;
 }

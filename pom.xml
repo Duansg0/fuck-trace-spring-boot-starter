@@ -6,7 +6,7 @@
 
     <groupId>com.melot.talkee</groupId>
     <artifactId>talkee-trace-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.6-SNAPSHOT</version>
 
     <!-- 设置默认的 Repository 为 Melot 的私服，而非 “http://repo1.maven.org/maven2/” -->
     <distributionManagement>
@@ -30,6 +30,11 @@
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+            <version>3.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
