@@ -1,34 +1,27 @@
 package com.talkee.trace.interceptor;
 
-import com.baomidou.mybatisplus.core.override.PageMapperProxy;
 import com.talkee.trace.base.AbstractTraceInterceptor;
-import com.talkee.trace.model.DalDigestModel;
-import com.talkee.trace.util.AopTargetUtil;
+import com.talkee.trace.enums.BoolEnum;
+import com.talkee.trace.model.DaoDigestModel;
 import com.talkee.trace.util.LoggerFormatUtil;
 import lombok.Data;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.AdvisedSupport;
-import org.springframework.aop.framework.AopProxy;
 import org.springframework.aop.support.AopUtils;
 
-import java.lang.reflect.Field;
-
+/**
+ * @author Duansg
+ * @desc dao层上下文拦截器
+ * @date 2019-12-31 17:46:12
+ */
 @Data
 public class DaoDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor {
 
-    /**
-     * @desc 摘要日志
-     */
-    private static final Logger digestLogger = LoggerFactory.getLogger("DAL_DIGEST");
-    /**
-     * @desc 日志
-     */
-    private static final Logger logger = LoggerFactory.getLogger(DaoDigestInterceptor.class);
+    private static final Logger digestLogger = LoggerFactory.getLogger("DAO_DIGEST");
 
-    private String appName;
+    private static final Logger logger = LoggerFactory.getLogger(DaoDigestInterceptor.class);
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         long startTime = System.currentTimeMillis();
@@ -39,18 +32,17 @@ public class DaoDigestInterceptor extends AbstractTraceInterceptor implements Me
             return result;
         } finally {
             try {
-                //没有解决mybatis-plus
-                if(AopUtils.getTargetClass(invocation.getThis()).newInstance() instanceof PageMapperProxy){
-                    System.out.println(1);
-                }
-                String namespace =  AopUtils.getTargetClass(invocation.getThis()).getName();
-                String actionName = invocation.getMethod().getName();
-                String url = namespace + "." + actionName;
+                /**
+                 * AopUtils.getTargetClass(invocation.getThis()).getName();
+                 * 无法兼容到mybatis-plus,特此如下改造,但是不排除会有异常的情况,
+                 */
+                Class<?>[] interfaces = AopUtils.getTargetClass(invocation.getThis()).getInterfaces();
+                String url = interfaces[0].getName() + "." + invocation.getMethod().getName();
                 long costTime = System.currentTimeMillis() - startTime;
-                DalDigestModel dalDigestModel = new DalDigestModel(appName, url, isSuccess ? "S" : "F", costTime);
-                logDigest(dalDigestModel, digestLogger);
+                DaoDigestModel daoDigestModel = new DaoDigestModel(appName, url, BoolEnum.get(isSuccess), costTime);
+                logDigest(daoDigestModel, digestLogger);
             } catch (Throwable ignore) {
-                LoggerFormatUtil.error(ignore, logger, "数据库摘要日志异常");
+                LoggerFormatUtil.error(ignore, logger, "数据库摘要日志异常!");
             }
         }
     }

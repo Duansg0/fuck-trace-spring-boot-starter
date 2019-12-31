@@ -6,15 +6,16 @@ import org.apache.commons.lang3.StringUtils;
 import java.text.MessageFormat;
 
 @Data
-public class DalDigestModel extends DigestModel{
+public class DaoDigestModel extends DigestModel{
+
     /**
-     * 应用名称
-     * */
+     * @desc 应用名称
+     */
     private String appName;
 
     /**
-     * dao class + method
-     * */
+     * @desc className + method
+     */
     private String url;
 
     /**
@@ -25,12 +26,11 @@ public class DalDigestModel extends DigestModel{
      * @param resultCode
      * @param costTime
      */
-    public DalDigestModel(String appName, String url, String resultCode, long costTime) {
+    public DaoDigestModel(String appName, String url, String resultCode, long costTime) {
         super(resultCode, costTime);
         this.url = url;
         this.appName = appName;
     }
-
 
     /**
      * @see java.lang.Object#toString()

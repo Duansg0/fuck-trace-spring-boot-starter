@@ -6,25 +6,22 @@ import lombok.Data;
 public class DigestModel {
 
     /**
-     * 耗时，ms
+     * @desc 耗时，ms
      */
     protected long costTime;
 
     /**
-     * 结果码
+     * @desc 结果码
      */
     protected String resultCode;
 
     /**
-     * 无参构造函数
-     * Creates a new instance of DigestModel.
+     * @desc 无参构造函数
      */
     public DigestModel() {}
 
     /**
-     * 构造函数
-     * Creates a new instance of DigestModel.
-     *
+     * @desc 构造函数
      * @param resultCode
      * @param costTime
      */
@@ -32,4 +29,5 @@ public class DigestModel {
         this.resultCode = resultCode;
         this.costTime = costTime;
     }
+
 }

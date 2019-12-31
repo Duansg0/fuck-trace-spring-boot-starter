@@ -13,6 +13,8 @@ public abstract class AbstractTraceInterceptor implements TraceInterceptor{
 
     protected boolean digestLogOpen = true;
 
+    public String appName;
+
     public void preTrace() {
 
     }
