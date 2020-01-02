@@ -1,6 +1,6 @@
 package com.talkee.trace.config;
 
-import com.talkee.trace.annotation.TraceLog;
+import com.talkee.trace.annotation.Trace;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.SmartInitializingSingleton;
@@ -21,7 +21,7 @@ public class TraceContainerConfiguration implements ApplicationContextAware, Sma
     }
 
     public void afterSingletonsInstantiated() {
-        Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(TraceLog.class);
+        Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(Trace.class);
         if (beans != null) {
             for(Map.Entry<String, Object> entry : beans.entrySet()){
                 entry.getKey();

@@ -9,19 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 @Data
-public abstract class AbstractTraceInterceptor implements TraceInterceptor{
+public abstract class AbstractTraceInterceptor {
 
     protected boolean digestLogOpen = true;
 
     public String appName;
-
-    public void preTrace() {
-
-    }
-
-    public void postTrace() {
-
-    }
 
     protected void logDigest(DigestModel digestModel, Logger digestLogger) {
         //摘要日志开关

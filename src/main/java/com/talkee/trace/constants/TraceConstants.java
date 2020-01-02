@@ -17,6 +17,12 @@ public class TraceConstants {
     /** 摘要日志中的指向箭头  */
     public static final String POINT_DIGEST_CHAR = " -> ";
 
+    /** MVC摘要日志 */
+    public static final String MVC_DIGEST_LOG = "PV_DIGEST";
+
+    /** mvc框架名称 */
+    public static final String MVC_FRAM_NAME = "springmvc";
+
     /** 错误摘要日志  */
     public static final String ERROR_DIGEST_LOG = "ERROR_DIGEST";
 
@@ -37,4 +43,19 @@ public class TraceConstants {
 
     /** 摘要日志开关 */
     public static final String DIGEST_LOG_SWITCH = "digestLog.switch";
+
+    /** RpcAttachment前缀 */
+    public static final String RPC_ATTACHMENT_PREFIX = "dubboTrace.";
+
+    /** RPC客户端摘要日志 */
+    public static final String RPC_CLIENT_DIGEST_LOG = "RPC_CLIENT_DIGEST";
+
+    /** RPC服务端摘要日志 */
+    public static final String RPC_SERVER_DIGEST_LOG = "RPC_SERVER_DIGEST";
+
+    /** 消费端应用名称 */
+    public static final String CONSUMER_APPLICATION_KEY = "consumer.application";
+
+    /** 提供者端应用名称 */
+    public static final String PROVIDER_APPLICATION_KEY = "provider.application";
 }

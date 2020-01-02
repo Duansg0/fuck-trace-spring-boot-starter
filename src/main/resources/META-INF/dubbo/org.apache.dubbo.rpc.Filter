@@ -1,0 +1,2 @@
+consumerTraceFilter=com.talkee.trace.filter.DubboConsumerTraceFilter
+providerTraceFilter=com.talkee.trace.filter.DubboProviderTraceFilter

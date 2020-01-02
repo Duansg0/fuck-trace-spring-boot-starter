@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 /**
  * @author Duansg
- * @desc 结果布尔标识枚举
+ * @desc
  * @date 2019-12-31 18:13:22
  */
 @Getter
