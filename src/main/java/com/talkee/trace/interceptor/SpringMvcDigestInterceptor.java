@@ -3,19 +3,16 @@ package com.talkee.trace.interceptor;
 import com.talkee.trace.base.AbstractTraceInterceptor;
 import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.enums.BoolEnum;
-import com.talkee.trace.model.DaoDigestModel;
 import com.talkee.trace.model.PvDigestModel;
 import com.talkee.trace.util.LoggerFormatUtil;
 import com.talkee.trace.util.TraceInitUtil;
 import com.talkee.trace.util.TraceUtil;
-import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -23,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @desc springMvc拦截器
  * @date 2020-01-02 15:13:22
  */
-public class SpringMvcDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor {
+public class SpringMvcDigestInterceptor extends AbstractTraceInterceptor  {
 
     private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.MVC_DIGEST_LOG);
 
@@ -55,7 +52,7 @@ public class SpringMvcDigestInterceptor extends AbstractTraceInterceptor impleme
         } finally {
             try {
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                //resolveLoadTest();
+                resolveLoadTest(request);
                 long costTime = System.currentTimeMillis() - startTime;
                 PvDigestModel pvDigestModel = new PvDigestModel(request.getRequestURI(), costTime, TraceConstants.MVC_FRAM_NAME, BoolEnum.get(isSuccess), appName);
                 //打印摘要日志
