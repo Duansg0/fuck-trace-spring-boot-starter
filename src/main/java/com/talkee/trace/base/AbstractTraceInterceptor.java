@@ -5,11 +5,12 @@ import com.talkee.trace.model.DigestModel;
 import com.talkee.trace.util.DynamicPropertyUtil;
 import com.talkee.trace.util.TraceUtil;
 import lombok.Data;
+import org.aopalliance.intercept.MethodInterceptor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 @Data
-public abstract class AbstractTraceInterceptor {
+public abstract class AbstractTraceInterceptor implements MethodInterceptor {
 
     protected boolean digestLogOpen = true;
 

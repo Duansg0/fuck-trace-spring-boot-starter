@@ -8,22 +8,6 @@
     <artifactId>talkee-trace-spring-boot-starter</artifactId>
     <version>1.6-SNAPSHOT</version>
 
-    <!-- 设置默认的 Repository 为 Melot 的私服，而非 “http://repo1.maven.org/maven2/” -->
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Nexus Releases Repository</name>
-            <url>http://maven.kktv2.com:8081/nexus/content/repositories/releases</url>
-        </repository>
-
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Nexus Snapshots Repository</name>
-            <url>http://maven.kktv2.com:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -76,6 +60,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
             <version>2.6.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+            <version>1.1.2.RELEASE</version>
         </dependency>
     </dependencies>
     <build>

@@ -5,7 +5,6 @@ import com.alibaba.dubbo.rpc.*;
 import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.enums.InvokeSideTypeEnum;
 import com.talkee.trace.model.RpcDigestModel;
-import com.talkee.trace.util.DynamicPropertyUtil;
 import com.talkee.trace.util.LoggerFormatUtil;
 import com.talkee.trace.util.TraceUtil;
 import org.apache.commons.lang3.StringUtils;
