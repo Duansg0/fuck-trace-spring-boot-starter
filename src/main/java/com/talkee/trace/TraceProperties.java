@@ -13,6 +13,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix="spring.boot.trace")
 public class TraceProperties {
     /**
+     * @desc 服务名称
+     */
+    private String appName;
+    /**
      * @desc
      * 例如定义切入点表达式 * com.duansg.service.impl..*.*(..)
      * 1、第一个*号：表示返回类型， *号表示所有的类型。
@@ -20,20 +24,27 @@ public class TraceProperties {
      * 3、第二个*号：表示类名，*号表示所有的类。
      * 4、*(..):最后这个星号表示方法名，*号表示所有的方法，后面括弧里面表示方法的参数，两个句点表示任何参数
      */
-    private String traceExecution ;
-
-    private String traceMvcExecution ;
+    private String traceDaoExecution ;
     /**
-     * @desc dao摘要日志开关,默认开启状态
+     *
+     */
+    private String tracePvExecution ;
+    /**
+     *
+     */
+    private String traceFeignExecution ;
+
+    /**
+     *
      */
     private boolean digestDaoLogOpen = true;
     /**
-     * @desc pv摘要日志开关,默认开启状态
+     *
      */
     private boolean digestPvLogOpen = true;
     /**
-     * @desc 服务名称
+     *
      */
-    private String appName;
+    private boolean digestFeginLogOpen = true;
 
 }

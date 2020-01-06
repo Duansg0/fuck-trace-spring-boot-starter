@@ -1,28 +1,27 @@
 package com.talkee.trace.interceptor;
 
-import feign.RequestInterceptor;
-import feign.RequestTemplate;
-import org.springframework.util.ObjectUtils;
+import com.talkee.trace.base.AbstractTraceInterceptor;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
-public class FeginInterceptor implements RequestInterceptor {
+/**
+ * @author Duansg
+ * @desc
+ * @date
+ */
+public class FeginInterceptor extends AbstractTraceInterceptor implements MethodInterceptor {
 
     @Override
-    public void apply(RequestTemplate requestTemplate) {
+    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        if (!ObjectUtils.isEmpty(request)){
-            String header = request.getHeader("");
-            String traceId = request.getHeader("traceId");
-
-
-
-
-
-        }
-        System.out.println(1);
+        Enumeration<String> headerNames = request.getHeaderNames();
+        String header = request.getHeader("");
+        String traceId = request.getHeader("traceId");
+        return null;
     }
 }

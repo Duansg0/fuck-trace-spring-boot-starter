@@ -1,6 +1,6 @@
 package com.talkee.trace.base;
 
-import com.talkee.trace.TraceProperties;
+import com.talkee.trace.model.InterceptorInitInfoModel;
 import com.talkee.trace.support.AssertSupport;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
@@ -20,15 +20,15 @@ public class InterceptorBuilder {
     /**
      *
      * @param interceptor
-     * @param traceProperties
+     * @param model
      * @return
      */
-    public static DefaultPointcutAdvisor build(AbstractTraceInterceptor interceptor, TraceProperties traceProperties) {
-        AssertSupport.isNotBlank(traceProperties.getAppName(),"trace appName cannot be empty !");
-        interceptor.setAppName(traceProperties.getAppName());
+    public static DefaultPointcutAdvisor build(AbstractTraceInterceptor interceptor, InterceptorInitInfoModel model) {
+        AssertSupport.isNotBlank(model.getAppName(),"trace appName cannot be empty !");
+        interceptor.setAppName(model.getAppName());
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        AssertSupport.isNotBlank(traceProperties.getTraceExecution(),"trace execution cannot be empty !");
-        pointcut.setExpression(String.format(execution,traceProperties.getTraceMvcExecution()));
+        AssertSupport.isNotBlank(model.getExecution(),"trace execution cannot be empty !");
+        pointcut.setExpression(String.format(execution, model.getExecution()));
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
         advisor.setPointcut(pointcut);
         advisor.setAdvice(interceptor);
