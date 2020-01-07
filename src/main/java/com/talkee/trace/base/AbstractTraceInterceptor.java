@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 @Data
-public abstract class AbstractTraceInterceptor implements MethodInterceptor {
+public abstract class AbstractTraceInterceptor implements MethodInterceptor{
 
     protected boolean digestLogOpen = true;
 

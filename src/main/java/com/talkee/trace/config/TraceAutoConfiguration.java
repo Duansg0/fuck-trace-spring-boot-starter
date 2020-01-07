@@ -3,9 +3,10 @@ package com.talkee.trace.config;
 import com.talkee.trace.TraceProperties;
 import com.talkee.trace.base.InterceptorBuilder;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
-import com.talkee.trace.interceptor.FeginInterceptor;
-import com.talkee.trace.interceptor.SpringMvcDigestInterceptor;
+import com.talkee.trace.interceptor.FeignDigestInterceptor;
+import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
 import com.talkee.trace.model.InterceptorInitInfoModel;
+import feign.RequestInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -38,21 +39,19 @@ public class TraceAutoConfiguration {
      * @param traceProperties
      * @return
      */
-    @Bean(name = "springMvcDigestInterceptor")
+    @Bean(name = "springPvDigestInterceptor")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestPvLogOpen", havingValue = "true")
-    public DefaultPointcutAdvisor defaultPointcutAdvisorMvc(TraceProperties traceProperties) {
-        return InterceptorBuilder.build(new SpringMvcDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTracePvExecution(), traceProperties.getAppName()).build());
+    public DefaultPointcutAdvisor defaultPointcutAdvisorPv(TraceProperties traceProperties) {
+        return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTracePvExecution(), traceProperties.getAppName()).build());
     }
 
     /**
-     *
      * @param traceProperties
      * @return
      */
-    @Bean
-    @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestFeginLogOpen", havingValue = "true")
-    public DefaultPointcutAdvisor defaultPointcutAdvisorMvcFegin(TraceProperties traceProperties) {
-        return InterceptorBuilder.build(new FeginInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTraceFeignExecution(), traceProperties.getAppName()).build());
+    @Bean(name = "springPvDigestInterceptor")
+    @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestFeignLogOpen", havingValue = "true")
+    public RequestInterceptor requestInterceptor(TraceProperties traceProperties) {
+        return new FeignDigestInterceptor();
     }
-
 }

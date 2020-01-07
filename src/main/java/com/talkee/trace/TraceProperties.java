@@ -32,11 +32,6 @@ public class TraceProperties {
     /**
      *
      */
-    private String traceFeignExecution ;
-
-    /**
-     *
-     */
     private boolean digestDaoLogOpen = true;
     /**
      *
@@ -45,6 +40,6 @@ public class TraceProperties {
     /**
      *
      */
-    private boolean digestFeginLogOpen = true;
+    private boolean digestFeignLogOpen = true;
 
 }

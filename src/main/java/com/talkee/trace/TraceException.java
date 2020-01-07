@@ -1,6 +1,7 @@
 package com.talkee.trace;
 
 import lombok.Data;
+
 /**
  * @author Duansg
  * @desc 自定义异常

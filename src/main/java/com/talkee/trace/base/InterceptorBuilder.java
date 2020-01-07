@@ -2,6 +2,7 @@ package com.talkee.trace.base;
 
 import com.talkee.trace.model.InterceptorInitInfoModel;
 import com.talkee.trace.support.AssertSupport;
+import org.aopalliance.aop.Advice;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 
