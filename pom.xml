@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.melot.talkee</groupId>
-    <artifactId>talkee-trace-spring-boot-starter</artifactId>
+    <groupId>com.duansg.fuck</groupId>
+    <artifactId>fuck-trace-spring-boot-starter</artifactId>
     <version>1.6-SNAPSHOT</version>
 
     <dependencies>
