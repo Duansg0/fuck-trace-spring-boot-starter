@@ -3,7 +3,7 @@ package com.talkee.trace.config;
 import com.talkee.trace.TraceProperties;
 import com.talkee.trace.base.InterceptorBuilder;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
-import com.talkee.trace.interceptor.FeignDigestInterceptor;
+import com.talkee.trace.interceptor.FeignDigestConfiguration;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
 import com.talkee.trace.model.InterceptorInitInfoModel;
 import feign.RequestInterceptor;
@@ -52,6 +52,6 @@ public class TraceAutoConfiguration {
     @Bean(name = "springPvDigestInterceptor")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestFeignLogOpen", havingValue = "true")
     public RequestInterceptor requestInterceptor(TraceProperties traceProperties) {
-        return new FeignDigestInterceptor();
+        return new FeignDigestConfiguration();
     }
 }

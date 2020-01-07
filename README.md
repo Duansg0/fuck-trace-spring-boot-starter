@@ -14,4 +14,9 @@ spring.boot.trace.digestPvLogOpen=true
 spring.boot.trace.tracePvExecution=* com.melot.talkee.api.facade.controller..*.*(..)
 spring.boot.trace.digestFeignLogOpen=true
 ```
-
+注意：
+    feign的使用,要在启动类加入额外配置
+    ```java
+    @EnableFeignClients(basePackages = {"com.melot.planet"},defaultConfiguration = FeignDigestConfiguration.class)
+    ```
+    
