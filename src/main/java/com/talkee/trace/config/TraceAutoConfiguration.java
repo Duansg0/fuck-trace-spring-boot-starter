@@ -3,7 +3,6 @@ package com.talkee.trace.config;
 import com.talkee.trace.TraceProperties;
 import com.talkee.trace.base.InterceptorBuilder;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
-import com.talkee.trace.interceptor.FeignDigestConfiguration;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
 import com.talkee.trace.model.InterceptorInitInfoModel;
 import feign.RequestInterceptor;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Import;
 
 /**
  * @author Duansg
- * @desc 全局自动配置类
+ * @desc Global auto Configuration
  * @date 2019-12-31 17:18:12
  */
 @Import({TraceContainerConfiguration.class})
@@ -24,7 +23,7 @@ public class TraceAutoConfiguration {
 
 
     /**
-     * @desc Dao层拦截器自动注册
+     * @desc Register the request interceptor for the Dao layer.
      * @param traceProperties
      * @return
      */
@@ -35,7 +34,7 @@ public class TraceAutoConfiguration {
     }
 
     /**
-     * @desc
+     * @desc Register the Controller's request interceptor.
      * @param traceProperties
      * @return
      */
@@ -46,12 +45,13 @@ public class TraceAutoConfiguration {
     }
 
     /**
+     * @desc Register Feign's request interceptor.
      * @param traceProperties
      * @return
      */
-    @Bean(name = "springPvDigestInterceptor")
+    @Bean(name = "feignDigestConfiguration")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestFeignLogOpen", havingValue = "true")
     public RequestInterceptor requestInterceptor(TraceProperties traceProperties) {
-        return new FeignDigestConfiguration();
+        return new FeignDigestConfiguration(traceProperties.getAppName());
     }
 }

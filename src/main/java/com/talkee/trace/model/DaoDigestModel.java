@@ -5,11 +5,16 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import java.text.MessageFormat;
 
+/**
+ * @author Duansg
+ * @desc
+ * @date 2020-01-07 21:42:12
+ */
 @Data
 public class DaoDigestModel extends DigestModel{
 
     /**
-     * @desc 应用名称
+     * @desc appName
      */
     private String appName;
 
@@ -20,7 +25,6 @@ public class DaoDigestModel extends DigestModel{
 
     /**
      * Creates a new instance of DalDigestModel.
-     *
      * @param appName
      * @param url
      * @param resultCode

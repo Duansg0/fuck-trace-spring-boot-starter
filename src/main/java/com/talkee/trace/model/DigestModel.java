@@ -2,6 +2,11 @@ package com.talkee.trace.model;
 
 import lombok.Data;
 
+/**
+ * @author Duansg
+ * @desc
+ * @date 2020-01-07 22:55:33
+ */
 @Data
 public class DigestModel {
 

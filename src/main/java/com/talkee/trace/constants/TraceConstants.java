@@ -58,4 +58,7 @@ public class TraceConstants {
 
     /** 提供者端应用名称 */
     public static final String PROVIDER_APPLICATION_KEY = "provider.application";
+    /** DAO层摘要日志 */
+    public static final String DAO_DIGEST_LOG = "DAO_DIGEST";
+
 }
