@@ -6,12 +6,13 @@ import org.springframework.util.ObjectUtils;
 
 /**
  * @author Duansg
- * @desc
+ * @desc AssertSupport
  * @date 2019-12-25 10:33:21
  */
 public class AssertSupport {
+
     /**
-     * 不能为空,否则抛异常
+     * @desc Cannot be null, otherwise throw exception
      * @param object
      * @param message
      * @throws TraceException
@@ -23,7 +24,7 @@ public class AssertSupport {
     }
 
     /**
-     * 不能为空,否则抛异常
+     * @desc Cannot be null, otherwise throw exception
      * @param object
      * @param message
      * @throws TraceException
@@ -33,8 +34,9 @@ public class AssertSupport {
             throw new TraceException(errorCode,message);
         }
     }
+
     /**
-     * 不能为空,否则抛异常
+     * @desc Cannot be null, otherwise throw exception
      * @param str
      * @param message
      * @throws TraceException
@@ -46,15 +48,18 @@ public class AssertSupport {
     }
 
     /**
-     *
+     * @desc Null, otherwise throw exception
+     * @param object
+     * @param message
      */
     public static void isEmpty(Object object, String message) {
         if (!ObjectUtils.isEmpty(object)){
             throw new TraceException(message);
         }
     }
+
     /**
-     * 所有参数不能为空
+     * @desc All params cannot be null
      * @param message
      * @param objects
      */
@@ -69,7 +74,7 @@ public class AssertSupport {
     }
 
     /**
-     * 所有参数不能为空
+     * @desc All params cannot be null
      * @param message
      * @param objects
      */
@@ -82,6 +87,7 @@ public class AssertSupport {
             }
         }
     }
+
     /**
      * @desc There must be one
      * @param message
@@ -100,6 +106,7 @@ public class AssertSupport {
             }
         }
     }
+
     /**
      * @desc
      * @param message

@@ -14,7 +14,7 @@ import com.talkee.trace.util.TraceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Activate(group = { Constants.PROVIDER },order = -99)
+@Activate(group = { Constants.PROVIDER })
 public class DubboProviderTraceFilter extends AbstractTraceFilter {
 
     private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.RPC_SERVER_DIGEST_LOG);

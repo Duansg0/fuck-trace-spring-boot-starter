@@ -22,19 +22,27 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Data
 public class FeignDigestConfiguration implements RequestInterceptor {
-
+    /**
+     *
+     */
     private static final Logger logger = LoggerFactory.getLogger(FeignDigestConfiguration.class);
-
+    /**
+     *
+     */
     private String appName;
 
     /**
-     * Constructor
+     * @desc Constructor
      * @param appName
      */
     public FeignDigestConfiguration(String appName) {
         this.appName = appName;
     }
 
+    /**
+     * @desc
+     * @param requestTemplate
+     */
     @Override
     public void apply(RequestTemplate requestTemplate) {
         try{
@@ -48,6 +56,11 @@ public class FeignDigestConfiguration implements RequestInterceptor {
                 String traceId = TraceUtil.getTraceId();
                 //获取调用地址
                 String url = requestTemplate.url();
+                //解析是否携带了压测参数
+                String extendField = TraceUtil.getContextExtendParam(TraceConstants.LOAD_TEST_KEY);
+                if (StringUtils.isNotBlank(extendField)){
+                    requestTemplate.header(TraceConstants.LOAD_TEST_KEY, extendField);
+                }
                 if (StringUtils.isBlank(traceId)){
                     //上下文中没有traceId,初始化TraceContext
                     TraceContext traceContext = new TraceContext();
@@ -55,7 +68,7 @@ public class FeignDigestConfiguration implements RequestInterceptor {
                     //保证后续操作上下文可以获取
                     TraceUtil.setTraceContext(traceContext);
                 }
-                LoggerFormatUtil.info(logger,"Feign调用拦截,({0}),appName={1},请求路径为:{2},调用路径为{3}",traceId,appName,requestURI,url);
+                LoggerFormatUtil.info(logger,"Feign调用拦截,({0})({1}),appName={2},请求路径为:{3},调用路径为{4}",StringUtils.defaultIfBlank(extendField, TraceConstants.EMPTY_DIGEST_VALUE),traceId,appName,requestURI,url);
                 requestTemplate.header(TraceConstants.TRACE_ID_KEY, traceId);
             }
         }catch (Throwable ignore) {

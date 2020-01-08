@@ -3,12 +3,15 @@ package com.talkee.trace.support;
 import com.talkee.trace.model.TraceContext;
 
 import java.util.Map;
-
+/**
+ * @author Duansg
+ * @desc TraceContextSupport
+ * @date 2020-01-08 23:10:33
+ */
 public class TraceContextSupport {
 
     /**
-     * 获取当前统一上下文的traceId，可空
-     *
+     * @desc Get the nullable traceId of the current uniform context
      * @return traceId
      */
     public static String getTraceId() {
@@ -17,8 +20,7 @@ public class TraceContextSupport {
     }
 
     /**
-     * 获取当前统一上下文
-     *
+     * @desc Get the current unified context
      * @return TraceContext
      */
     public static TraceContext getTraceContext(){
@@ -26,36 +28,34 @@ public class TraceContextSupport {
     }
 
     /**
-     * 初始化当前统一上下文
+     * @desc Initializes the current unified context
      */
     public static void initTraceContext() {
         UnSafeTraceContextHolder.initTraceContext();
     }
 
     /**
-     * 克隆当前统一上下文，深拷贝
-     *
+     * @desc Clone the current unified context, deep copy
      * @return TraceContext
      */
     public static TraceContext cloneTraceContext() {
         try {
             return UnSafeTraceContextHolder.cloneTraceContext();
         } catch(Throwable ignore) {
-            //抛出异常不应该影响业务
+            //gitignore
             return null;
         }
     }
 
     /**
-     * 清理统一上下文
+     * @desc Clean up uniform context
      */
     public static void clearTraceContext() {
         UnSafeTraceContextHolder.clearTraceContext();
     }
 
     /**
-     * 设置当前统一上下文
-     *
+     * @desc Set the current unified context
      * @param traceContext
      */
     public static void setTraceContext(TraceContext traceContext) {
@@ -63,8 +63,7 @@ public class TraceContextSupport {
     }
 
     /**
-     * 构造TraceContext
-     *
+     * @desc build context
      * @return TraceContext
      */
     public static TraceContext generateTraceContext(){
@@ -72,8 +71,7 @@ public class TraceContextSupport {
     }
 
     /**
-     * 获取拓展参数
-     *
+     * @desc Get expansion parameters
      * @param key
      * @return value
      */
@@ -83,8 +81,7 @@ public class TraceContextSupport {
     }
 
     /**
-     * 设置拓展参数
-     *
+     * @desc Set expansion parameters
      * @param key
      * @param value
      */
@@ -96,8 +93,7 @@ public class TraceContextSupport {
     }
 
     /**
-     * 获取业务上下文的拓展map
-     *
+     * @desc Get expansion map of the business context.
      * @return
      */
     public static Map<String, String> getContextExtendField(){

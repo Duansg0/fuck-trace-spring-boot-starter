@@ -15,9 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Map;
 
-@Activate(group = { Constants.CONSUMER },order = -99)
+@Activate(group = { Constants.CONSUMER })
 public class DubboConsumerTraceFilter extends AbstractTraceFilter {
-
+    /**
+     * @desc
+     */
     private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.RPC_CLIENT_DIGEST_LOG);
 
     @Override

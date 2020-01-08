@@ -2,21 +2,28 @@ package com.talkee.trace.base;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.rpc.*;
+import com.talkee.trace.TraceProperties;
 import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.enums.InvokeSideTypeEnum;
 import com.talkee.trace.model.RpcDigestModel;
+import com.talkee.trace.util.DynamicPropertyUtil;
 import com.talkee.trace.util.LoggerFormatUtil;
 import com.talkee.trace.util.TraceUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ObjectUtils;
 
+/**
+ * @author Duansg
+ * @desc
+ * @date
+ */
 public abstract class AbstractTraceFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractTraceFilter.class);
     /**
-     * 记录摘要日志
-     *
+     * @desc 记录摘要日志
      * @param invoker
      * @param invocation
      * @param clientHost
@@ -48,8 +55,7 @@ public abstract class AbstractTraceFilter implements Filter {
     }
 
     /**
-     * 构造RpcDigestModel
-     *
+     * @desc 构造RpcDigestModel
      * @param invoker
      * @param invocation
      * @param clientName
@@ -88,8 +94,7 @@ public abstract class AbstractTraceFilter implements Filter {
     }
 
     /**
-     * 获取RpcContextAttachment
-     *
+     * @desc 获取RpcContextAttachment
      * @param paramKey
      * @return
      */
@@ -103,8 +108,7 @@ public abstract class AbstractTraceFilter implements Filter {
     }
 
     /**
-     * 获取InvokerUrlParam
-     *
+     * @desc 获取InvokerUrlParam
      * @param invoker
      * @return
      */
@@ -117,25 +121,24 @@ public abstract class AbstractTraceFilter implements Filter {
         }
     }
 
-
     /**
-     * 摘要日志是否开启
-     *
+     * @desc 摘要日志是否开启
      * @return
      */
     protected boolean openDigestLog(){
-        //摘要日志开关
-        //boolean digestLogSwitch = DynamicPropertyUtil.getProperty(TraceConstants.DIGEST_LOG_SWITCH, true);
-        //digestLogSwitch && traceFilterConfig != null && traceFilterConfig.isDigestLogOpen();
-        return true;
+        TraceProperties traceProperties = DynamicPropertyUtil.getTraceProperties();
+        if (!ObjectUtils.isEmpty(traceProperties)){
+            return traceProperties.isDigestDubboLogOpen();
+        }
+        return false;
     }
+
     /**
-     * 初始化统一上下文是否开启
-     *
+     * //TODO
+     * @desc 初始化统一上下文是否开启
      * @return
      */
     protected boolean openInitTrace(){
-//        return traceFilterConfig != null && traceFilterConfig.isInitTraceOpen();
         return true;
     }
 }

@@ -20,67 +20,58 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Duansg
- * @desc springMvc拦截器
+ * @desc SpringMvc interceptor
  * @date 2020-01-02 15:13:22
  */
 public class SpringPvDigestInterceptor extends AbstractTraceInterceptor {
 
+    /**
+     * @desc Digestpv's logger.
+     */
     private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.MVC_DIGEST_LOG);
 
+    /**
+     * @desc SpringPvDigestInterceptor's logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger(SpringPvDigestInterceptor.class);
 
-
     /**
-     * 解析压测参数
+     * @desc Analyze the pressure parameters
      */
     public void resolveLoadTest(HttpServletRequest request) {
-        if (request != null
-                && StringUtils.isNotBlank(request.getHeader(TraceConstants.HTTP_LOAD_TEST_KEY))) {
+        if (!ObjectUtils.isEmpty(request) && StringUtils.isNotBlank(request.getHeader(TraceConstants.HTTP_LOAD_TEST_KEY))) {
             String loadTest = request.getHeader(TraceConstants.HTTP_LOAD_TEST_KEY);
             LoggerFormatUtil.debug(logger, "loadTest={0}", loadTest);
             TraceUtil.putContextExtendParam(TraceConstants.LOAD_TEST_KEY, loadTest);
         }
     }
 
+    /**
+     * @desc invoke
+     * @param invocation
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         long startTime = System.currentTimeMillis();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         boolean isSuccess = false;
         try {
-            checkFeign(request);
             Object result = invocation.proceed();
             isSuccess = true;
             return result;
         } finally {
+            resolveLoadTest(request);
             try {
-                resolveLoadTest(request);
                 long costTime = System.currentTimeMillis() - startTime;
                 PvDigestModel pvDigestModel = new PvDigestModel(request.getRequestURI(), costTime, TraceConstants.MVC_FRAM_NAME, BoolEnum.get(isSuccess), appName);
-                //打印摘要日志
                 logDigest(pvDigestModel, digestLogger);
             } catch (Throwable ignore) {
-                LoggerFormatUtil.error(ignore, logger, "数据库摘要日志异常!");
+                LoggerFormatUtil.error(ignore, logger, "Trace pv digest log exception");
             }
             TraceUtil.clearTraceContext();
         }
     }
 
-    private void checkFeign(HttpServletRequest request) {
-        TraceContext traceContext = null ;
-        if (!ObjectUtils.isEmpty(request)){
-            String traceId = request.getHeader("traceId");
-            if (StringUtils.isNotBlank(traceId)){
-                traceContext = new TraceContext(traceId);
-            }else {
-                traceContext = new TraceContext();
-                traceId = traceContext.getTraceId();
-            }
-            request.setAttribute("traceId",traceId);
-            TraceUtil.setTraceContext(traceContext);
-        }else {
-            //统一上下文前置操作
-            TraceInitUtil.initTraceContext();
-        }
-    }
 }

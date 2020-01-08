@@ -2,9 +2,11 @@ package com.talkee.trace.config;
 
 import com.talkee.trace.annotation.TraceCustomInterceptor;
 import com.talkee.trace.base.AbstractTraceInterceptor;
+import com.talkee.trace.base.GobalConfigContext;
 import com.talkee.trace.constants.TraceCustomConstants;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
+import com.talkee.trace.util.DynamicPropertyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -26,6 +28,7 @@ public class TraceContainerConfiguration implements ApplicationContextAware, Sma
     private ConfigurableApplicationContext applicationContext;
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        DynamicPropertyUtil.setApplicationContext(applicationContext);
         this.applicationContext = ((ConfigurableApplicationContext)applicationContext);
     }
 

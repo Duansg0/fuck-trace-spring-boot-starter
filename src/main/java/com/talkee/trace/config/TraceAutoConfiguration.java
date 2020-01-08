@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 
 /**
  * @author Duansg
- * @desc Global auto Configuration
+ * @desc Global auto configuration
  * @date 2019-12-31 17:18:12
  */
 @Import({TraceContainerConfiguration.class})

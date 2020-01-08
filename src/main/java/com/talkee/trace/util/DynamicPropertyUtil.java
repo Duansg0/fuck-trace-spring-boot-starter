@@ -1,101 +1,86 @@
 package com.talkee.trace.util;
 
+import com.talkee.trace.TraceProperties;
+import com.talkee.trace.base.GobalConfigContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.util.ObjectUtils;
 
+/**
+ * @author Duansg
+ * @desc DynamicPropertyUtil
+ * @date @date 2020-01-08 19:22:11
+ */
 public class DynamicPropertyUtil {
-    /** 日志 */
+
+    /**
+     * @desc
+     */
     private static final Logger logger = LoggerFactory.getLogger(DynamicPropertyUtil.class);
+    /**
+     * @desc ApplicationContext
+     */
+    private static ApplicationContext applicationContext ;
 
     /**
-     * 获取String类型属性
-     *
-     * @param key
-     * @param defaultValue
+     * @desc setApplicationContext
+     * @param applicationContext
+     */
+    public static void setApplicationContext(ApplicationContext applicationContext) {
+        DynamicPropertyUtil.applicationContext = applicationContext;
+    }
+
+    /**
+     * @desc get property for digestSwitch.
      * @return
      */
-    public static String getProperty(String key, String defaultValue){
+    public static boolean getProperty(){
         try {
-            return System.getProperty(key, defaultValue);
+            GobalConfigContext bean = applicationContext.getBean(GobalConfigContext.class);
+            if (ObjectUtils.isEmpty(applicationContext)||ObjectUtils.isEmpty(bean)){
+                return true;
+            }
+            return Boolean.valueOf(bean.isDigestSwitch());
         } catch (Throwable t) {
-            LoggerFormatUtil.warn(logger, "获取String动态配置异常,key={0},defaultValue={1}", key, defaultValue);
-            return defaultValue;
+            LoggerFormatUtil.warn(logger, "Get dynamic configuration exception!");
+            return true;
         }
     }
 
     /**
-     * 设置String类型属性
-     *
-     * @param key
+     * @desc set property for digestSwitch.
      * @param value
      */
-    public static void setProperty(String key, String value) {
+    public static void setProperty(boolean value) {
         try {
-            System.setProperty(key, value);
+            GobalConfigContext bean = applicationContext.getBean(GobalConfigContext.class);
+            if (ObjectUtils.isEmpty(applicationContext)||ObjectUtils.isEmpty(bean)){
+                return ;
+            }
+            bean.setDigestSwitch(Boolean.valueOf(bean.isDigestSwitch()));
         } catch (Throwable t) {
-            LoggerFormatUtil.warn(logger, "设置String动态配置异常,key={0},value={1}", key, value);
+            LoggerFormatUtil.warn(logger, "Set dynamic configuration exception,value={0}", value);
         }
     }
 
     /**
-     * 获取Long类型动态配置
-     *
-     * @param key
-     * @param defaultValue
+     * @desc get traceProperties
      * @return
      */
-    public static long getProperty(String key, long defaultValue){
-        try {
-            String value = System.getProperty(key, String.valueOf(defaultValue));
-            return Long.parseLong(value);
-        } catch (Throwable t) {
-            LoggerFormatUtil.warn(logger, "获取long动态配置异常,key={0},defaultValue={1}", key, defaultValue);
-            return defaultValue;
-        }
+    public static TraceProperties getTraceProperties(){
+        return applicationContext.getBean(TraceProperties.class);
     }
 
     /**
-     * 设置long类型属性
-     *
-     * @param key
-     * @param value
-     */
-    public static void setProperty(String key, long value) {
-        try {
-            System.setProperty(key, String.valueOf(value));
-        } catch (Throwable t) {
-            LoggerFormatUtil.warn(logger, "设置long动态配置异常,key={0},value={1}", key, value);
-        }
-    }
-
-    /**
-     * 获取boolean类型动态配置
-     *
-     * @param key
-     * @param defaultValue
+     * @desc get appName
      * @return
      */
-    public static boolean getProperty(String key, boolean defaultValue){
-        try {
-            String value = System.getProperty(key, String.valueOf(defaultValue));
-            return Boolean.valueOf(value);
-        } catch (Throwable t) {
-            LoggerFormatUtil.warn(logger, "获取boolean动态配置异常,key={0},defaultValue={1}", key, defaultValue);
-            return defaultValue;
+    public static String getAppName() {
+        TraceProperties traceProperties = applicationContext.getBean(TraceProperties.class);
+        if (ObjectUtils.isEmpty(applicationContext)||ObjectUtils.isEmpty(traceProperties)){
+            return null;
         }
-    }
-
-    /**
-     * 设置boolean类型属性
-     *
-     * @param key
-     * @param value
-     */
-    public static void setProperty(String key, boolean value) {
-        try {
-            System.setProperty(key, String.valueOf(value));
-        } catch (Throwable t) {
-            LoggerFormatUtil.warn(logger, "设置boolean动态配置异常,key={0},value={1}", key, value);
-        }
+        return traceProperties.getAppName();
     }
 }

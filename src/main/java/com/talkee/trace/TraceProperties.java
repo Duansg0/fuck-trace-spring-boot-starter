@@ -40,6 +40,10 @@ public class TraceProperties {
     /**
      *
      */
-    private boolean digestFeignLogOpen = true;
+    private boolean digestFeignLogOpen = false;
+    /**
+     *
+     */
+    private boolean digestDubboLogOpen = false;
 
 }

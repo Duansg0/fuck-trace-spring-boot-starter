@@ -1,17 +1,18 @@
 package com.talkee.trace.util;
 
-import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.model.TraceContext;
 import com.talkee.trace.support.TraceContextSupport;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Map;
 
+/**
+ * @author Duansg
+ * @desc TraceUtil.
+ * @date 2020-01-08 19:22:11
+ */
 public class TraceUtil {
 
     /**
-     * 获取当前统一上下文的traceId，可空
-     *
+     * @desc Gets the nullable traceId of the current uniform context
      * @return traceId
      */
     public static String getTraceId() {
@@ -19,8 +20,7 @@ public class TraceUtil {
     }
 
     /**
-     * 获取当前统一上下文，可空
-     *
+     * @desc Gets the current uniform context, nullable
      * @return
      */
     public static TraceContext getTraceContext(){
@@ -28,15 +28,14 @@ public class TraceUtil {
     }
 
     /**
-     * 清理当前统一上下文
+     * @desc Clean up the current unified context
      */
     public static void clearTraceContext() {
         TraceContextSupport.clearTraceContext();
     }
 
     /**
-     * 克隆当前统一上下文
-     *
+     * @desc Clone the current unified context
      * @return
      */
     public static TraceContext cloneTraceContext() {
@@ -44,8 +43,7 @@ public class TraceUtil {
     }
 
     /**
-     * 设置当前统一上下文
-     *
+     * @desc Sets the current unified context
      * @param traceContext
      */
     public static void setTraceContext(TraceContext traceContext) {
@@ -53,8 +51,7 @@ public class TraceUtil {
     }
 
     /**
-     * 获取拓展参数
-     *
+     * @desc Obtain expansion parameters
      * @param key
      * @return value
      */
@@ -63,8 +60,7 @@ public class TraceUtil {
     }
 
     /**
-     * 设置拓展参数
-     *
+     * @desc Set expansion parameters
      * @param key
      * @param value
      */
@@ -73,21 +69,11 @@ public class TraceUtil {
     }
 
     /**
-     * 获取业务上下文的拓展map
-     *
+     * @desc Get an extended map of the business context
      * @return
      */
     public static Map<String, String> getContextExtendField(){
         return TraceContextSupport.getContextExtendField();
     }
 
-    /**
-     * 判断是否是压测环境
-     *
-     * @return
-     */
-    public static boolean isLoadTest() {
-        return DynamicPropertyUtil.getProperty(TraceConstants.LOAD_TEST_SWITCH, false)
-                && StringUtils.endsWithIgnoreCase("true", getContextExtendParam(TraceConstants.LOAD_TEST_KEY));
-    }
 }
