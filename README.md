@@ -64,8 +64,10 @@ LoggerFormatUtil.info(logger,"UserService get user info ,userId:{0} ,userName:{1
 
 ```java
 TraceContext traceContext = TraceUtil.getTraceContext();//获取当前上下文对象
-TraceUtil.setTraceContext(new TraceContext());//设置上下文
+TraceUtil.setTraceContext(new TraceContext());//设置上下文,默认生成traceId
 TraceUtil.setTraceContext(new TraceContext("eyJhbGciOiJIUzI1NiJ9"));//设置带TraceId的上下文
+TraceInitUtil.initTraceContext();//初始化上下文对象,并设置到全局变量中
+TraceContext traceContext = TraceInitUtil.generateTraceContext();//构建上下文对象
 TraceUtil.clearTraceContext();//清理上下文
 TraceContext traceContext = TraceUtil.cloneTraceContext();//克隆当前上下文对象,为了防止清理操作或者参数篡改
 String traceId = TraceUtil.getTraceId();//获取当前上下文中的TraceId
