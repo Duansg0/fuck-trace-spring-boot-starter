@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Import;
 @EnableConfigurationProperties({TraceProperties.class})
 public class TraceAutoConfiguration {
 
-
     /**
      * @desc Register the request interceptor for the Dao layer.
      * @param traceProperties
@@ -30,7 +29,7 @@ public class TraceAutoConfiguration {
     @Bean(name = "daoDigestInterceptor")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestDaoLogOpen", havingValue = "true")
     public DefaultPointcutAdvisor defaultPointcutAdvisorDao(TraceProperties traceProperties) {
-        return InterceptorBuilder.build(new DaoDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTraceDaoExecution(), traceProperties.getAppName()).build());
+        return InterceptorBuilder.build(new DaoDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTraceDaoExecution(), traceProperties.getAppName(),traceProperties.isDigestDaoLogOpen()).build());
     }
 
     /**
@@ -41,7 +40,7 @@ public class TraceAutoConfiguration {
     @Bean(name = "springPvDigestInterceptor")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestPvLogOpen", havingValue = "true")
     public DefaultPointcutAdvisor defaultPointcutAdvisorPv(TraceProperties traceProperties) {
-        return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTracePvExecution(), traceProperties.getAppName()).build());
+        return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTracePvExecution(), traceProperties.getAppName(),traceProperties.isDigestPvLogOpen()).build());
     }
 
     /**
