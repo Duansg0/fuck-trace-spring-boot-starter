@@ -58,6 +58,7 @@ public class SpringPvDigestInterceptor extends AbstractTraceInterceptor {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         boolean isSuccess = false;
         try {
+            TraceInitUtil.initTraceContext();
             Object result = invocation.proceed();
             isSuccess = true;
             return result;
