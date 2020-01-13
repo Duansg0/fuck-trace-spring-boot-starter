@@ -1,11 +1,13 @@
 package com.talkee.trace.config;
 
+import com.talkee.trace.TraceProperties;
 import com.talkee.trace.annotation.TraceCustomInterceptor;
 import com.talkee.trace.base.AbstractTraceInterceptor;
 import com.talkee.trace.base.GobalConfigContext;
 import com.talkee.trace.constants.TraceCustomConstants;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
+import com.talkee.trace.support.ClazzBuildSupport;
 import com.talkee.trace.util.DynamicPropertyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +21,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -33,6 +36,21 @@ public class TraceContainerConfiguration implements ApplicationContextAware, Sma
     }
 
     public void afterSingletonsInstantiated() {
+
+        TraceProperties traceProperties = DynamicPropertyUtil.getTraceProperties();
+        String customIncerptor = traceProperties.getCustomIncerptor();
+        try {
+            //获取自定义拦截器的所有的实例的对象
+            List<GobalConfigContext> gobalConfigContexts = ClazzBuildSupport.newInstanceList(customIncerptor);
+            //注册
+            //删除现有的拦截器
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         DefaultListableBeanFactory autowireCapableBeanFactory = (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
         Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(TraceCustomInterceptor.class);
         if (!ObjectUtils.isEmpty(beans)&&!ObjectUtils.isEmpty(autowireCapableBeanFactory)) {

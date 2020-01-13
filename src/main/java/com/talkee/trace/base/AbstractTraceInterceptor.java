@@ -32,7 +32,7 @@ public abstract class AbstractTraceInterceptor implements MethodInterceptor{
      */
     protected void logDigest(DigestModel digestModel, Logger digestLogger) {
         //判断摘要日志全局总开关 ，校验参数
-        if (DynamicPropertyUtil.getProperty() && digestLogOpen && digestModel != null){
+        if (digestLogOpen && digestModel != null){
             StringBuilder builder = new StringBuilder();
             String traceId = TraceUtil.getTraceId();
             traceId = StringUtils.isBlank(traceId) ? TraceConstants.EMPTY_DIGEST_VALUE : traceId;

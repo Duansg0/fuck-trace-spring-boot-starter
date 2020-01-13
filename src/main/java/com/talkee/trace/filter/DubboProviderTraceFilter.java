@@ -44,7 +44,6 @@ public class DubboProviderTraceFilter extends AbstractTraceFilter {
                     InvokeSideTypeEnum.PROVIDER, clientName, serverName);
             throw e;
         } finally {
-            //清理统一上下文
             TraceUtil.clearTraceContext();
         }
     }

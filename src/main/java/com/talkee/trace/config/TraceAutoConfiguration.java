@@ -1,10 +1,12 @@
 package com.talkee.trace.config;
 
 import com.talkee.trace.TraceProperties;
+import com.talkee.trace.base.GobalConfigContext;
 import com.talkee.trace.base.InterceptorBuilder;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
 import com.talkee.trace.model.InterceptorInitInfoModel;
+import com.talkee.trace.support.ClazzBuildSupport;
 import feign.RequestInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -53,4 +55,5 @@ public class TraceAutoConfiguration {
     public RequestInterceptor requestInterceptor(TraceProperties traceProperties) {
         return new FeignDigestConfiguration(traceProperties.getAppName());
     }
+
 }

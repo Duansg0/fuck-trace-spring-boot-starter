@@ -45,5 +45,10 @@ public class TraceProperties {
      *
      */
     private boolean digestDubboLogOpen = false;
+    /**
+     *
+     */
+    private String customIncerptor;
+
 
 }

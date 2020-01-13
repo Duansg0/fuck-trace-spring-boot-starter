@@ -25,9 +25,7 @@ public class DubboConsumerTraceFilter extends AbstractTraceFilter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         long start = System.currentTimeMillis();
-        //服务端IP
         String remoteHost = null;
-        //客户端应用名称
         String cApplication = null;
         TraceContext traceContext = TraceUtil.getTraceContext();
         boolean isTraceEmpty = (traceContext == null);
@@ -56,7 +54,6 @@ public class DubboConsumerTraceFilter extends AbstractTraceFilter {
             throw e;
         } finally {
             if (isTraceEmpty) {
-                //清理统一上下文
                 TraceUtil.clearTraceContext();
             }
         }
