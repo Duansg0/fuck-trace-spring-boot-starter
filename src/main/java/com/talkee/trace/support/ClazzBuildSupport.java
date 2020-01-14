@@ -1,5 +1,7 @@
 package com.talkee.trace.support;
 
+import com.talkee.trace.TraceException;
+import com.talkee.trace.annotation.TraceCustomInterceptor;
 import com.talkee.trace.base.GobalConfigContext;
 
 import java.util.ArrayList;
@@ -16,14 +18,22 @@ public class ClazzBuildSupport {
      * @return
      * @throws Exception
      */
-    public static List<GobalConfigContext> newInstanceList(String clazzNamesStr) throws Exception{
-        AssertSupport.isNotBlank(clazzNamesStr,"clazzName not blank.");
+    public static List<Object> newInstanceList(String clazzNamesStr, Class<?> clazzType){
+        AssertSupport.isNotBlank(clazzNamesStr,"clazzName is blank.");
         String[] clazzNames = clazzNamesStr.split(",");
-        List<GobalConfigContext> gobalConfigContexts = new ArrayList<>();
-        for (String clazzName : clazzNames) {
-            Class<?> clazz = Class.forName(clazzName);
-            gobalConfigContexts.add((GobalConfigContext) clazz.newInstance());
+        List<Object> gobalConfigContexts = new ArrayList<>();
+        try{
+            for (String clazzName : clazzNames) {
+                Class<?> clazz = Class.forName(clazzName);
+                if (!clazz.isAnnotationPresent(TraceCustomInterceptor.class)){
+                    throw new TraceException("The TraceCustomInterceptor annotation does not exist.");
+                }
+                gobalConfigContexts.add(clazz.newInstance());
+            }
+        }catch (Exception e){
+            throw new TraceException("NewInstance throws an exception.");
         }
         return gobalConfigContexts;
     }
+
 }
