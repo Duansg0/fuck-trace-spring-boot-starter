@@ -44,13 +44,11 @@ public class DubboConsumerTraceFilter extends AbstractTraceFilter {
             Result result =  invoker.invoke(invocation);
             //获取remoteHost
             remoteHost = RpcContext.getContext().getRemoteHost();
-            logRpcDigest(invoker, invocation, NetUtils.getLocalHost(), remoteHost, start, -1, digestLogger,
-                    InvokeSideTypeEnum.CONSUMER, cApplication, null);
+            logRpcDigest(invoker, invocation, NetUtils.getLocalHost(), remoteHost, start, -1, digestLogger,InvokeSideTypeEnum.CONSUMER, cApplication, null);
             return result;
         } catch (RpcException e) {
             int resultCode = (e != null) ? e.getCode() : 0;
-            logRpcDigest(invoker, invocation, NetUtils.getLocalHost(), remoteHost, start, resultCode, digestLogger,
-                    InvokeSideTypeEnum.CONSUMER, cApplication, null);
+            logRpcDigest(invoker, invocation, NetUtils.getLocalHost(), remoteHost, start, resultCode, digestLogger,InvokeSideTypeEnum.CONSUMER, cApplication, null);
             throw e;
         } finally {
             if (isTraceEmpty) {

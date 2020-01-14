@@ -30,13 +30,18 @@ public class FeignDigestConfiguration implements RequestInterceptor {
      *
      */
     private String appName;
+    /**
+     *
+     */
+    private boolean digestFeignLogOpen = false;
 
     /**
      * @desc Constructor
      * @param appName
      */
-    public FeignDigestConfiguration(String appName) {
+    public FeignDigestConfiguration(String appName,boolean digestFeignLogOpen) {
         this.appName = appName;
+        this.digestFeignLogOpen = digestFeignLogOpen;
     }
 
     /**
@@ -48,7 +53,7 @@ public class FeignDigestConfiguration implements RequestInterceptor {
         try{
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
                     .getRequestAttributes();
-            if (!ObjectUtils.isEmpty(attributes)){
+            if (digestFeignLogOpen && !ObjectUtils.isEmpty(attributes)){
                 HttpServletRequest request = attributes.getRequest();
                 //获取请求地址
                 String requestURI = ObjectUtils.isEmpty(request)? null: request.getRequestURI();

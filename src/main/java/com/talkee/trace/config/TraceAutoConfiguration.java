@@ -1,12 +1,10 @@
 package com.talkee.trace.config;
 
 import com.talkee.trace.TraceProperties;
-import com.talkee.trace.base.GobalConfigContext;
 import com.talkee.trace.base.InterceptorBuilder;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
 import com.talkee.trace.model.InterceptorInitInfoModel;
-import com.talkee.trace.support.ClazzBuildSupport;
 import feign.RequestInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -42,7 +40,7 @@ public class TraceAutoConfiguration {
     @Bean(name = "springPvDigestInterceptor")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestPvLogOpen", havingValue = "true")
     public DefaultPointcutAdvisor defaultPointcutAdvisorPv(TraceProperties traceProperties) {
-        return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTracePvExecution(), traceProperties.getAppName(),traceProperties.isDigestPvLogOpen()).build());
+       return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTracePvExecution(), traceProperties.getAppName(),traceProperties.isDigestPvLogOpen()).build());
     }
 
     /**
@@ -53,7 +51,7 @@ public class TraceAutoConfiguration {
     @Bean(name = "feignDigestConfiguration")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestFeignLogOpen", havingValue = "true")
     public RequestInterceptor requestInterceptor(TraceProperties traceProperties) {
-        return new FeignDigestConfiguration(traceProperties.getAppName());
+        return new FeignDigestConfiguration(traceProperties.getAppName(),traceProperties.isDigestFeignLogOpen());
     }
 
 }

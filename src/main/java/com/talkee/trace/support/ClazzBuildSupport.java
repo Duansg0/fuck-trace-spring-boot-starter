@@ -18,7 +18,7 @@ public class ClazzBuildSupport {
      * @return
      * @throws Exception
      */
-    public static List<Object> newInstanceList(String clazzNamesStr, Class<?> clazzType){
+    public static List<?> newInstanceList(String clazzNamesStr){
         AssertSupport.isNotBlank(clazzNamesStr,"clazzName is blank.");
         String[] clazzNames = clazzNamesStr.split(",");
         List<Object> gobalConfigContexts = new ArrayList<>();
