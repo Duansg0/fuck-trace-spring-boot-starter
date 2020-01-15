@@ -2,6 +2,7 @@ package com.talkee.trace.model;
 
 import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.enums.InvokeSideTypeEnum;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -13,69 +14,52 @@ import java.text.MessageFormat;
  * 	 结果码 (-1:成功，0:UNKNOWN_EXCEPTION,1:NETWORK_EXCEPTION,
  *   2:TIMEOUT_EXCEPTION,3:BIZ_EXCEPTION,4:FORBIDDEN_EXCEPTION,5:SERIALIZATION_EXCEPTION)
  */
+@Data
 public class RpcDigestModel extends DigestModel {
 
     /**
      * 客户端名称
      */
-    @Getter
-    @Setter
     private String clientName;
 
     /**
      * 服务端名称
      */
-    @Getter
-    @Setter
     private String serverName;
 
     /**
      * 服务名称
      */
-    @Getter
-    @Setter
     private String service;
 
     /**
      * 方法名称
      */
-    @Getter
-    @Setter
     private String method;
 
     /**
      * 服务所属group
      */
-    @Getter
-    @Setter
     private String group;
 
     /**
      * 版本号
      */
-    @Getter
-    @Setter
     private String version;
 
     /**
      * 客户端host
      */
-    @Getter
-    @Setter
     private String clientHost;
 
     /**
      * 服务端host
      */
-    @Getter
-    @Setter
     private String serverHost;
 
     /**
      * 调用端类型
      */
-    @Getter
-    @Setter
     private InvokeSideTypeEnum invokeSide;
 
     /**
@@ -84,6 +68,7 @@ public class RpcDigestModel extends DigestModel {
      * Creates a new instance of RpcDigestModel.
      */
     public RpcDigestModel() {
+
     }
 
     /**
@@ -107,8 +92,6 @@ public class RpcDigestModel extends DigestModel {
     }
 
     /**
-     * 重写toString
-     *
      * @see java.lang.Object#toString()
      */
     public String toString() {

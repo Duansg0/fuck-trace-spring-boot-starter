@@ -15,13 +15,17 @@ import org.springframework.aop.support.AopUtils;
 /**
  * @author Duansg
  * @desc Dao context interceptor
- * @date 2019-12-31 17:46:12
+ * @date 2019-12-31 19:46:12
  */
 @Data
 public class DaoDigestInterceptor extends AbstractTraceInterceptor {
-
+    /**
+     *
+     */
     private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.DAO_DIGEST_LOG);
-
+    /**
+     *
+     */
     private static final Logger logger = LoggerFactory.getLogger(DaoDigestInterceptor.class);
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -35,7 +39,7 @@ public class DaoDigestInterceptor extends AbstractTraceInterceptor {
             try {
                 /**
                  * AopUtils.getTargetClass(invocation.getThis()).getName();
-                 * 因为无法兼容到mybatis-plus,特此如下改造,但是不排除会有异常的情况,
+                 * 因为无法兼容到mybatis-plus,特此如下改造,经测试可以兼容到Mybatis,但是不排除会有异常的情况,请关注！
                  */
                 Class<?>[] interfaces = AopUtils.getTargetClass(invocation.getThis()).getInterfaces();
                 String url = interfaces[0].getName() + "." + invocation.getMethod().getName();
@@ -43,7 +47,7 @@ public class DaoDigestInterceptor extends AbstractTraceInterceptor {
                 DaoDigestModel daoDigestModel = new DaoDigestModel(appName, url, BoolEnum.get(isSuccess), costTime);
                 logDigest(daoDigestModel, digestLogger);
             } catch (Throwable ignore) {
-                LoggerFormatUtil.error(ignore, logger, "数据库摘要日志异常!");
+                LoggerFormatUtil.error(ignore, logger, "DaoDigestInterceptor throws an exception.");
             }
         }
     }

@@ -8,6 +8,7 @@ import lombok.Setter;
  * @desc
  * @date
  */
+@Getter
 public enum  InvokeSideTypeEnum {
     /** 消费者 */
     CONSUMER("client", "消费者端"),
@@ -16,13 +17,9 @@ public enum  InvokeSideTypeEnum {
     PROVIDER("server", "消费者端");
 
     /** 名称 */
-    @Getter
-    @Setter
     private String name;
 
     /** 描述 */
-    @Getter
-    @Setter
     private String desc;
 
     /**

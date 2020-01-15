@@ -3,31 +3,27 @@ package com.talkee.trace.model;
 import java.text.MessageFormat;
 
 import com.talkee.trace.constants.TraceConstants;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
 public class PvDigestModel extends DigestModel {
 
     /**
      * url
      */
-    @Getter
-    @Setter
     private String url;
 
     /**
      * 框架名称，SpringMvc、Struts2
      */
-    @Getter
-    @Setter
     private String framName;
 
     /**
      * 应用名称
      */
-    @Getter
-    @Setter
     private String appName;
 
     /**
@@ -36,6 +32,7 @@ public class PvDigestModel extends DigestModel {
      * Creates a new instance of PvDigestModel.
      */
     public PvDigestModel() {
+
     }
 
     /**
@@ -57,8 +54,6 @@ public class PvDigestModel extends DigestModel {
     }
 
     /**
-     * 重写toString
-     *
      * @see java.lang.Object#toString()
      */
     public String toString() {

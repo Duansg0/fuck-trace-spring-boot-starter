@@ -141,6 +141,7 @@ public class LoggerFormatUtil extends AbstractLoggerUtil {
                 formatMessage = MessageFormat.format(format, params);
             }catch(Throwable ignore){
                 //ignore
+                logger.warn( "MessageFormat log format is not correct, please pay attention，" + format);
             }
         }
         return formatMessage;
