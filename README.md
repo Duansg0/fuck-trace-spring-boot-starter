@@ -1,17 +1,22 @@
 # fuck-trace-spring-boot-starter(摘要日志)
 
 #### 前言
-    没啥好说的
+    它能解决什么问题?
+        1:对接ELK
+        2:统计数据
+        3:耗时优化
+        4:问题排查
+        5:链路跟踪
 
 #### 配置
 
 ```java
 spring.boot.trace.appName=api-facade
-spring.boot.trace.digestDaoLogOpen=true
+spring.boot.trace.traceSwitch=true
 spring.boot.trace.traceDaoExecution=* com.melot.talkee.api.facade.dao..*.*(..)
-spring.boot.trace.digestPvLogOpen=true
 spring.boot.trace.tracePvExecution=* com.melot.talkee.api.facade.controller..*.*(..)
-spring.boot.trace.digestFeignLogOpen=true
+spring.boot.trace.traceSwitchFeign=true
+spring.boot.trace.traceSwitchDubbo=true
 ```
 ###### Feign
 
@@ -20,18 +25,28 @@ spring.boot.trace.digestFeignLogOpen=true
 @EnableFeignClients(basePackages = {"com.melot.planet"},defaultConfiguration = FeignDigestConfiguration.class)
 ```
 
-###### Spring Cloud Config
+###### Spring Cloud Config/XDiamond等
 
 ```java
-//已兼容配置中心,需要继承GobalConfigContext,并为digestSwitch全局开关赋值.
-@RefreshScope
+//已兼容配置中心,需要在项目中实现如下操作
 @Configuration
-public class RefreshAutoConfig extends GobalConfigContext {
-    
+public class AutoRefreshConfiguration extends RefreshConfigPublish {
+
+    @Override
+    public void publish(String message) {
+        //message format
+        RefreshConfigModel build = new RefreshConfigModel.Builder()
+                .buildTraceSwitch(true)
+                .buildGobalSwitch(true)
+                .buildTraceSwitchDubbo(true)
+                .buildTraceSwitchFeign(false)
+                .build(this);
+        applicationEventPublisher.publishEvent(build);
+    }
 }
 ```
 
-###### Custom Interceptor
+###### Custom Interceptor（已废弃,//TODO）
 
 ```java
 //可以根据需要实现自定义的拦截器,需要指定自定义的类型,
@@ -44,6 +59,12 @@ public class CustomDaoInterceptor implements MethodInterceptor {
         return null;
     }
 }
+```
+
+###### Dubbo
+
+```java
+//直接使用
 ```
 
 ###### Pressure test
