@@ -39,7 +39,7 @@ public abstract class AbstractTraceFilter implements Filter {
                                 String serverHost, long start, int resultCode, Logger digestLogger, InvokeSideTypeEnum invokeSide,
                                 String clientName, String serverName) {
         try {
-            if (TraceUtil.getPerprotey(TraceConstants.DIGEST_LOG_SWITCH_DUBBO)) {
+            if (TraceUtil.getPerprotey(TraceConstants.DIGEST_LOG_SWITCH_DUBBO)&&TraceUtil.getPerprotey(TraceConstants.DIGEST_SWITCH)) {
                 RpcDigestModel rpcDigestModel = builderRpcDigestModel(invoker, invocation,
                         clientHost, serverHost, start, resultCode, invokeSide, clientName, serverName);
                 StringBuilder builder = new StringBuilder();

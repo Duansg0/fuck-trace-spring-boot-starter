@@ -20,10 +20,6 @@ public abstract class AbstractTraceInterceptor {
     /**
      * @desc
      */
-    protected boolean digestLogOpen = true;
-    /**
-     * @desc
-     */
     public String appName;
 
     /**
@@ -45,7 +41,7 @@ public abstract class AbstractTraceInterceptor {
      */
     protected void logDigest(DigestModel digestModel, Logger digestLogger) {
         //判断摘要日志全局总开关 ，校验参数
-        if (digestLogOpen && digestModel != null){
+        if (TraceUtil.getPerprotey(TraceConstants.DIGEST_LOG_SWITCH) && digestModel != null&&TraceUtil.getPerprotey(TraceConstants.DIGEST_SWITCH)){
             StringBuilder builder = new StringBuilder();
             String traceId = TraceUtil.getTraceId();
             traceId = StringUtils.isBlank(traceId) ? TraceConstants.EMPTY_DIGEST_VALUE : traceId;

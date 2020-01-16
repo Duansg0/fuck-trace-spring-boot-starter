@@ -6,18 +6,18 @@ import com.talkee.trace.util.TraceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Async;
 
 /**
  * @author Duansg
  * @desc
  * @date
  */
-@Component
-public class RefreshConfigListern implements ApplicationListener<RefreshConfigModel> {
+public class RefreshConfigListern implements ApplicationListener<RefreshConfigModel>{
 
     private static final Logger logger = LoggerFactory.getLogger(RefreshConfigListern.class);
 
+    @Async
     @Override
     public void onApplicationEvent(RefreshConfigModel config) {
         TraceUtil.setPerprotey(TraceConstants.DIGEST_LOG_SWITCH,String.valueOf(config.isTraceSwitch()));

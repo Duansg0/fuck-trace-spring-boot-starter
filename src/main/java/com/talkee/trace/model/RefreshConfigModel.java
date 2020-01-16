@@ -1,6 +1,8 @@
 package com.talkee.trace.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -8,27 +10,35 @@ import org.springframework.context.ApplicationEvent;
  * @desc
  * @date
  */
-@Data
+
 public class RefreshConfigModel extends ApplicationEvent {
 
     /**
      * @desc dao/pv开关
      * @desc key:spring.boot.trace.traceSwitch
      */
+    @Getter
+    @Setter
     private boolean traceSwitch;
     /**
      * @desc feign开关
      * @desc key:spring.boot.trace.traceSwitch.Feign
      */
+    @Getter
+    @Setter
     private boolean traceSwitchFeign;
     /**
      * @desc dubbo开关
      * @desc key:spring.boot.trace.traceSwitch.Dubbo
      */
+    @Getter
+    @Setter
     private boolean traceSwitchDubbo;
     /**
      * @desc 全局开关
      */
+    @Getter
+    @Setter
     private boolean gobalSwitch;
 
     /**

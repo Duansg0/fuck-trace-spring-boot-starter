@@ -29,7 +29,6 @@ public class InterceptorBuilder {
     public static DefaultPointcutAdvisor build(AbstractTraceInterceptor interceptor, InterceptorInitInfoModel model) {
         AssertSupport.isNotBlank(model.getAppName(),"trace appName cannot be empty !");
         interceptor.setAppName(model.getAppName());
-        interceptor.setDigestLogOpen(TraceUtil.getPerprotey(TraceConstants.DIGEST_LOG_SWITCH));
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
         AssertSupport.isNotBlank(model.getExecution(),"trace execution cannot be empty !");
         pointcut.setExpression(String.format(execution, model.getExecution()));
