@@ -2,15 +2,21 @@ package com.talkee.trace.config;
 
 import com.talkee.trace.TraceProperties;
 import com.talkee.trace.base.InterceptorBuilder;
+import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
 import com.talkee.trace.model.InterceptorInitInfoModel;
+import com.talkee.trace.support.ConfigInitSupport;
+import com.talkee.trace.util.ApplicationContextUtil;
+import com.talkee.trace.util.TraceUtil;
 import feign.RequestInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 /**
  * @author Duansg
@@ -26,10 +32,12 @@ public class TraceAutoConfiguration {
      * @param traceProperties
      * @return
      */
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     @Bean(name = "daoDigestInterceptor")
-    @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestDaoLogOpen", havingValue = "true")
+    @ConditionalOnProperty(prefix="spring.boot.trace",name = "traceSwitch", havingValue = "true")
     public DefaultPointcutAdvisor defaultPointcutAdvisorDao(TraceProperties traceProperties) {
-        return InterceptorBuilder.build(new DaoDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTraceDaoExecution(), traceProperties.getAppName(),traceProperties.isDigestDaoLogOpen()).build());
+        ConfigInitSupport.init(traceProperties);
+        return InterceptorBuilder.build(new DaoDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAppName(traceProperties.getAppName()).buildExecution(traceProperties.getTraceDaoExecution()).build());
     }
 
     /**
@@ -38,9 +46,9 @@ public class TraceAutoConfiguration {
      * @return
      */
     @Bean(name = "springPvDigestInterceptor")
-    @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestPvLogOpen", havingValue = "true")
+    @ConditionalOnProperty(prefix="spring.boot.trace",name = "traceSwitch", havingValue = "true")
     public DefaultPointcutAdvisor defaultPointcutAdvisorPv(TraceProperties traceProperties) {
-       return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAll(traceProperties.getTracePvExecution(), traceProperties.getAppName(),traceProperties.isDigestPvLogOpen()).build());
+       return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAppName(traceProperties.getAppName()).buildExecution(traceProperties.getTraceDaoExecution()).build());
     }
 
     /**
@@ -49,9 +57,9 @@ public class TraceAutoConfiguration {
      * @return
      */
     @Bean(name = "feignDigestConfiguration")
-    @ConditionalOnProperty(prefix="spring.boot.trace",name = "digestFeignLogOpen", havingValue = "true")
+    @ConditionalOnProperty(prefix="spring.boot.trace",name = "traceSwitch.Feign", havingValue = "true")
     public RequestInterceptor requestInterceptor(TraceProperties traceProperties) {
-        return new FeignDigestConfiguration(traceProperties.getAppName(),traceProperties.isDigestFeignLogOpen());
+        return new FeignDigestConfiguration(traceProperties.getAppName());
     }
 
 }

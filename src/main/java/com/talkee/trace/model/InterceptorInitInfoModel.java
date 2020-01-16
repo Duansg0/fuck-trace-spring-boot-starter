@@ -40,7 +40,14 @@ public class InterceptorInitInfoModel {
             this.digestLogOpen = digestLogOpen;
             return this;
         }
-
+        public Builder buildExecution(String execution) {
+            this.execution = execution;
+            return this;
+        }
+        public Builder buildAppName(String appName) {
+            this.appName = appName;
+            return this;
+        }
         public InterceptorInitInfoModel build() {
             return new InterceptorInitInfoModel(this);
         }

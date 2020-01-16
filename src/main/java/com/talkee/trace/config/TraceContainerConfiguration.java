@@ -1,6 +1,6 @@
 package com.talkee.trace.config;
 
-import com.talkee.trace.TraceProperties;
+import com.talkee.trace.annotation.TraceCustom;
 import com.talkee.trace.util.DynamicPropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.ObjectUtils;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Map;
 
 @Configuration
 public class TraceContainerConfiguration implements ApplicationContextAware, SmartInitializingSingleton {
@@ -20,18 +19,17 @@ public class TraceContainerConfiguration implements ApplicationContextAware, Sma
 
     private ConfigurableApplicationContext applicationContext;
 
-    private AtomicLong counter = new AtomicLong(0L);
-
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         DynamicPropertyUtil.setApplicationContext(applicationContext);
         this.applicationContext = ((ConfigurableApplicationContext)applicationContext);
     }
 
     public void afterSingletonsInstantiated() {
-        TraceProperties traceProperties = DynamicPropertyUtil.getTraceProperties();
-        if (!ObjectUtils.isEmpty(traceProperties)){
-            String customIncerptor = traceProperties.getCustomIncerptor();
-
+        //自定义拦截器配置
+        //TODO
+        try{
+            Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(TraceCustom.class);
+        }catch (Exception e){
 
         }
     }

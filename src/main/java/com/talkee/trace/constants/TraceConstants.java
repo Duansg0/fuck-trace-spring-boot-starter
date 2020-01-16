@@ -38,12 +38,6 @@ public class TraceConstants {
     /** HTTP头部压测的key */
     public static final String HTTP_LOAD_TEST_KEY = "trace-loadTest";
 
-    /** 压测的开关 */
-    public static final String LOAD_TEST_SWITCH = "loadTest.switch";
-
-    /** 摘要日志开关 */
-    public static final String DIGEST_LOG_SWITCH = "digestLog.switch";
-
     /** RpcAttachment前缀 */
     public static final String RPC_ATTACHMENT_PREFIX = "dubboTrace.";
 
@@ -61,5 +55,20 @@ public class TraceConstants {
 
     /** DAO层摘要日志 */
     public static final String DAO_DIGEST_LOG = "DAO_DIGEST";
+
+    /** 摘要日志开关*/
+    public static final String DIGEST_SWITCH = "spring.boot.trace.switch";
+
+    /** 摘要日志开关(DAO-PV) */
+    public static final String DIGEST_LOG_SWITCH = "spring.boot.trace.traceSwitch";
+
+    /** 摘要日志开关(FEIGN) */
+    public static final String DIGEST_LOG_SWITCH_FEIGN = "spring.boot.trace.traceSwitch.Feign";
+
+    /** 摘要日志开关(DUBBO) */
+    public static final String DIGEST_LOG_SWITCH_DUBBO = "spring.boot.trace.traceSwitch.Dubbo";
+
+    /** 压测的开关 */
+    public static final String LOAD_TEST_SWITCH = "loadTest.switch";
 
 }

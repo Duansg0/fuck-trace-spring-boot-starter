@@ -39,7 +39,7 @@ public abstract class AbstractTraceFilter implements Filter {
                                 String serverHost, long start, int resultCode, Logger digestLogger, InvokeSideTypeEnum invokeSide,
                                 String clientName, String serverName) {
         try {
-            if (openDigestLog()) {
+            if (TraceUtil.getPerprotey(TraceConstants.DIGEST_LOG_SWITCH_DUBBO)) {
                 RpcDigestModel rpcDigestModel = builderRpcDigestModel(invoker, invocation,
                         clientHost, serverHost, start, resultCode, invokeSide, clientName, serverName);
                 StringBuilder builder = new StringBuilder();
@@ -119,18 +119,6 @@ public abstract class AbstractTraceFilter implements Filter {
             LoggerFormatUtil.error(logger, "获取InvokerUrlParam异常,key={0}", paramKey);
             return null;
         }
-    }
-
-    /**
-     * @desc 摘要日志是否开启
-     * @return
-     */
-    protected boolean openDigestLog(){
-        TraceProperties traceProperties = DynamicPropertyUtil.getTraceProperties();
-        if (!ObjectUtils.isEmpty(traceProperties)){
-            return traceProperties.isDigestDubboLogOpen();
-        }
-        return false;
     }
 
     /**

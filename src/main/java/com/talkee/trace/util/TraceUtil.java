@@ -1,7 +1,11 @@
 package com.talkee.trace.util;
 
+import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.model.TraceContext;
+import com.talkee.trace.support.MemorySupport;
 import com.talkee.trace.support.TraceContextSupport;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Map;
 
 /**
@@ -76,4 +80,36 @@ public class TraceUtil {
         return TraceContextSupport.getContextExtendField();
     }
 
+    /**
+     * @param key
+     * @return
+     */
+    public static Boolean getPerprotey(String key) {
+        if (StringUtils.isBlank(MemorySupport.getProperty(key))||Boolean.valueOf(MemorySupport.getProperty(TraceConstants.DIGEST_SWITCH))){
+            return false;
+        }
+        return Boolean.valueOf(MemorySupport.getProperty(key));
+    }
+
+    /**
+     * @param key
+     * @param value
+     * @return
+     */
+    public static Boolean setPerprotey(String key ,String value) {
+        return MemorySupport.setProperty(key,value);
+    }
+
+    /**
+     * @param bool
+     * @param key
+     * @param value
+     * @return
+     */
+    public static Boolean setPerproteyByTrue(Boolean bool ,String key ,String value) {
+        if(bool){
+            return setPerprotey(key,value);
+        }
+        return false;
+    }
 }

@@ -30,21 +30,20 @@ public class TraceProperties {
      */
     private String tracePvExecution ;
     /**
-     *
+     * @desc dao/pv开关
+     * @desc key:spring.boot.trace.traceSwitch
      */
-    private boolean digestDaoLogOpen = true;
+    private boolean traceSwitch = false;
     /**
-     *
+     * @desc feign开关
+     * @desc key:spring.boot.trace.traceSwitch.Feign
      */
-    private boolean digestPvLogOpen = true;
+    private boolean traceSwitchFeign = false;
     /**
-     *
+     * @desc dubbo开关
+     * @desc key:spring.boot.trace.traceSwitch.Dubbo
      */
-    private boolean digestFeignLogOpen = false;
-    /**
-     *
-     */
-    private boolean digestDubboLogOpen = false;
+    private boolean traceSwitchDubbo = false;
     /**
      *
      */
