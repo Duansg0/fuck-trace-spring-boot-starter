@@ -3,6 +3,7 @@ package com.talkee.trace.base;
 import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.model.DigestModel;
 import com.talkee.trace.util.DynamicPropertyUtil;
+import com.talkee.trace.util.TraceInitUtil;
 import com.talkee.trace.util.TraceUtil;
 import lombok.Data;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -15,7 +16,7 @@ import org.slf4j.Logger;
  * @date 2020-01-08 20:12:22
  */
 @Data
-public abstract class AbstractTraceInterceptor implements MethodInterceptor{
+public abstract class AbstractTraceInterceptor {
     /**
      * @desc
      */
@@ -24,6 +25,18 @@ public abstract class AbstractTraceInterceptor implements MethodInterceptor{
      * @desc
      */
     public String appName;
+
+    /**
+     */
+    public void preTrace() {
+        //初始化统一上下文
+        TraceInitUtil.initTraceContext();
+    }
+
+    public void postTrace() {
+        //清理统一上下文
+        TraceUtil.clearTraceContext();
+    }
 
     /**
      * Digest log printing.

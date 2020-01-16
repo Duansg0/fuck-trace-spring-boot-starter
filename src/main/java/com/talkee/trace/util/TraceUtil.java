@@ -85,7 +85,7 @@ public class TraceUtil {
      * @return
      */
     public static Boolean getPerprotey(String key) {
-        if (StringUtils.isBlank(MemorySupport.getProperty(key))||Boolean.valueOf(MemorySupport.getProperty(TraceConstants.DIGEST_SWITCH))){
+        if (StringUtils.isBlank(MemorySupport.getProperty(key))||!Boolean.valueOf(MemorySupport.getProperty(TraceConstants.DIGEST_SWITCH))){
             return false;
         }
         return Boolean.valueOf(MemorySupport.getProperty(key));

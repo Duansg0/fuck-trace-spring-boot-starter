@@ -1,14 +1,11 @@
 package com.talkee.trace.config;
 
 import com.talkee.trace.TraceProperties;
+import com.talkee.trace.base.AbstractConfiguration;
 import com.talkee.trace.base.InterceptorBuilder;
-import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.interceptor.DaoDigestInterceptor;
 import com.talkee.trace.interceptor.SpringPvDigestInterceptor;
 import com.talkee.trace.model.InterceptorInitInfoModel;
-import com.talkee.trace.support.ConfigInitSupport;
-import com.talkee.trace.util.ApplicationContextUtil;
-import com.talkee.trace.util.TraceUtil;
 import feign.RequestInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -25,7 +22,7 @@ import org.springframework.core.annotation.Order;
  */
 @Import({TraceContainerConfiguration.class})
 @EnableConfigurationProperties({TraceProperties.class})
-public class TraceAutoConfiguration {
+public class TraceAutoConfiguration extends AbstractConfiguration {
 
     /**
      * @desc Register the request interceptor for the Dao layer.
@@ -36,7 +33,7 @@ public class TraceAutoConfiguration {
     @Bean(name = "daoDigestInterceptor")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "traceSwitch", havingValue = "true")
     public DefaultPointcutAdvisor defaultPointcutAdvisorDao(TraceProperties traceProperties) {
-        ConfigInitSupport.init(traceProperties);
+        super.init(traceProperties);
         return InterceptorBuilder.build(new DaoDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAppName(traceProperties.getAppName()).buildExecution(traceProperties.getTraceDaoExecution()).build());
     }
 
@@ -48,7 +45,8 @@ public class TraceAutoConfiguration {
     @Bean(name = "springPvDigestInterceptor")
     @ConditionalOnProperty(prefix="spring.boot.trace",name = "traceSwitch", havingValue = "true")
     public DefaultPointcutAdvisor defaultPointcutAdvisorPv(TraceProperties traceProperties) {
-       return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAppName(traceProperties.getAppName()).buildExecution(traceProperties.getTraceDaoExecution()).build());
+       super.init(traceProperties);
+       return InterceptorBuilder.build(new SpringPvDigestInterceptor(), new InterceptorInitInfoModel.Builder().buildAppName(traceProperties.getAppName()).buildExecution(traceProperties.getTracePvExecution()).build());
     }
 
     /**

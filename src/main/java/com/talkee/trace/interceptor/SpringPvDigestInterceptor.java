@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @desc SpringMvc interceptor
  * @date 2020-01-02 15:13:22
  */
-public class SpringPvDigestInterceptor extends AbstractTraceInterceptor {
+public class SpringPvDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor{
 
     /**
      * @desc Digestpv's logger.

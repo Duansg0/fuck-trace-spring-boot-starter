@@ -18,7 +18,7 @@ import org.springframework.aop.support.AopUtils;
  * @date 2019-12-31 19:46:12
  */
 @Data
-public class DaoDigestInterceptor extends AbstractTraceInterceptor {
+public class DaoDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor {
     /**
      *
      */

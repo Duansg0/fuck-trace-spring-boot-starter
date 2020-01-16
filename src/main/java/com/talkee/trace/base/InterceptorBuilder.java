@@ -4,7 +4,7 @@ import com.talkee.trace.constants.TraceConstants;
 import com.talkee.trace.model.InterceptorInitInfoModel;
 import com.talkee.trace.support.AssertSupport;
 import com.talkee.trace.util.TraceUtil;
-import org.aopalliance.aop.Advice;
+import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 
@@ -35,7 +35,7 @@ public class InterceptorBuilder {
         pointcut.setExpression(String.format(execution, model.getExecution()));
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
         advisor.setPointcut(pointcut);
-        advisor.setAdvice(interceptor);
+        advisor.setAdvice((MethodInterceptor) interceptor);
         return advisor;
     }
 }
