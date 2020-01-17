@@ -11,12 +11,12 @@
 #### 配置
 
 ```java
-spring.boot.trace.appName=api-facade
-spring.boot.trace.traceSwitch=true
+spring.boot.trace.appName=api-facade //项目名称
+spring.boot.trace.traceSwitch=true //PV-DAO开关
 spring.boot.trace.traceDaoExecution=* com.melot.talkee.api.facade.dao..*.*(..)
 spring.boot.trace.tracePvExecution=* com.melot.talkee.api.facade.controller..*.*(..)
-spring.boot.trace.traceSwitchFeign=true
-spring.boot.trace.traceSwitchDubbo=true
+spring.boot.trace.traceSwitchFeign=true //Feign开关
+spring.boot.trace.traceSwitchDubbo=true //Dubbo开关
 ```
 ###### Feign
 
@@ -70,7 +70,8 @@ public class CustomDaoInterceptor implements MethodInterceptor {
 ###### Pressure test
 
 ```
-//压测数据的分析,需要在请求头中加入trace-loadTest
+//压测数据的分析,需要在请求头中加入key:trace-loadTest,value:custorm
+(test)(c04338872a8046c689889ec1f4d55d97)(infra-user,/user/queryUser,50,springmvc,S)
 ```
 
 #### 使用
@@ -79,6 +80,9 @@ public class CustomDaoInterceptor implements MethodInterceptor {
 
 ```java
 LoggerFormatUtil.info(logger,"UserService get user info ,userId:{0} ,userName:{1}",10254, "Duansg");
+LoggerFormatUtil.debug(logger,"UserService get user info ,userId:{0} ,userName:{1}",10254, "Duansg");
+LoggerFormatUtil.error(logger,"UserService get user info ,userId:{0} ,userName:{1}",10254, "Duansg");
+LoggerFormatUtil.warn(logger,"UserService get user info ,userId:{0} ,userName:{1}",10254, "Duansg");
 ```
 
 ###### 上下文操作相关
