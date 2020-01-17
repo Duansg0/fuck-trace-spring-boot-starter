@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 public class TraceException extends RuntimeException {
-    //TEST1
+    //TEST2
     //TEST
     /**
      * @desc Exception code.
