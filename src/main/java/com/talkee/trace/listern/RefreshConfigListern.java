@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.Async;
 /**
  * @author Duansg
  * @desc
- * @date
+ * @date 2020-01-08 21:32:43
  */
 public class RefreshConfigListern implements ApplicationListener<RefreshConfigModel>{
 

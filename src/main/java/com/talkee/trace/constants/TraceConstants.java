@@ -1,5 +1,10 @@
 package com.talkee.trace.constants;
 
+/**
+ * @author Duansg
+ * @desc
+ * @date 2019-12-31 19:35:08
+ */
 public class TraceConstants {
 
     /** traceId的key */

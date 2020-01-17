@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * @author Duansg
  * @desc 全局配置类需要外部指定属性
- * @date 2019-12-27 14:32:12
+ * @date 2019-12-28 14:32:12
  */
 @Data
 @ConfigurationProperties(prefix="spring.boot.trace")

@@ -7,7 +7,11 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * @author Duansg
+ * @desc
+ * @date 2020-01-15 20:35:22
+ */
 @Data
 public class PvDigestModel extends DigestModel {
 

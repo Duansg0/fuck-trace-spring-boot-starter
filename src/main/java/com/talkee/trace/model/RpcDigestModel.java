@@ -9,10 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 import java.text.MessageFormat;
 
 /**
- * @Description RPC摘要日志模型
- *
+ * @author Duansg
+ * @desc RPC摘要日志模型
  * 	 结果码 (-1:成功，0:UNKNOWN_EXCEPTION,1:NETWORK_EXCEPTION,
  *   2:TIMEOUT_EXCEPTION,3:BIZ_EXCEPTION,4:FORBIDDEN_EXCEPTION,5:SERIALIZATION_EXCEPTION)
+ * @date 2020-01-15 20:35:22
  */
 @Data
 public class RpcDigestModel extends DigestModel {

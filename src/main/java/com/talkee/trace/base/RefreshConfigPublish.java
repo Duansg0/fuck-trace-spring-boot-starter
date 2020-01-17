@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEventPublisher;
 /**
  * @author Duansg
  * @desc
- * @date
+ * @date 2020-01-17 22:33:05
  */
 public abstract class RefreshConfigPublish {
 

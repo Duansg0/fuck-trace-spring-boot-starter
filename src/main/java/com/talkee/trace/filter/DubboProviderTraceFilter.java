@@ -13,7 +13,11 @@ import com.talkee.trace.util.TraceInitUtil;
 import com.talkee.trace.util.TraceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/**
+ * @author Duansg
+ * @desc
+ * @date 2019-12-31 20:38:02
+ */
 @Activate(group = { Constants.PROVIDER })
 public class DubboProviderTraceFilter extends AbstractTraceFilter {
 

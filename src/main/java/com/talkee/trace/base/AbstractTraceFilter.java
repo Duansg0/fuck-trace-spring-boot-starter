@@ -17,7 +17,7 @@ import org.springframework.util.ObjectUtils;
 /**
  * @author Duansg
  * @desc
- * @date
+ * @date 2019-12-21 21:36:03
  */
 public abstract class AbstractTraceFilter implements Filter {
 

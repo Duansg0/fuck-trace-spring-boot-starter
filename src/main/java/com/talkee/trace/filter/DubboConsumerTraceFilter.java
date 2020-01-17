@@ -15,6 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Map;
 
+/**
+ * @author Duansg
+ * @desc
+ * @date 2019-12-31 20:35:08
+ */
 @Activate(group = { Constants.CONSUMER })
 public class DubboConsumerTraceFilter extends AbstractTraceFilter {
     /**

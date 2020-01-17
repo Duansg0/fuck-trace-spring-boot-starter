@@ -8,9 +8,8 @@ import org.springframework.context.ApplicationEvent;
 /**
  * @author Duansg
  * @desc
- * @date
+ * @date 2020-01-15 20:35:22
  */
-
 public class RefreshConfigModel extends ApplicationEvent {
 
     /**

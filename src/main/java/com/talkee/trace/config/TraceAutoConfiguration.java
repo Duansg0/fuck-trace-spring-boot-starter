@@ -21,7 +21,7 @@ import org.springframework.core.annotation.Order;
 /**
  * @author Duansg
  * @desc Global auto configuration
- * @date 2019-12-31 17:18:12
+ * @date 2019-12-31 19:18:12
  */
 @Import({TraceContainerConfiguration.class})
 @EnableConfigurationProperties({TraceProperties.class})
@@ -63,7 +63,7 @@ public class TraceAutoConfiguration extends AbstractConfiguration {
     }
 
     /**
-     * @desv ApplicationListener.
+     * @desv Refresh config listern .
      * @return
      */
     @Bean

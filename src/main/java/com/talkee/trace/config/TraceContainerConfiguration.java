@@ -12,6 +12,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
+/**
+ * @author Duansg
+ * @desc
+ * @date 2019-12-31 19:18:14
+ */
 @Configuration
 public class TraceContainerConfiguration implements ApplicationContextAware, SmartInitializingSingleton {
 

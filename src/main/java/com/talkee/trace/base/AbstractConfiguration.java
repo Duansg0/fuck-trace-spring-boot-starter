@@ -8,7 +8,7 @@ import com.talkee.trace.util.TraceUtil;
 /**
  * @author Duansg
  * @desc
- * @date
+ * @date 2019-12-26 20:42:02
  */
 public abstract class AbstractConfiguration {
     /**
