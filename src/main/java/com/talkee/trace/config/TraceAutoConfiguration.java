@@ -57,7 +57,7 @@ public class TraceAutoConfiguration extends AbstractConfiguration {
      * @return
      */
     @Bean(name = "feignDigestConfiguration")
-    @ConditionalOnProperty(prefix="spring.boot.trace",name = "traceSwitch.Feign", havingValue = "true")
+    @ConditionalOnProperty(prefix="spring.boot.trace",name = "traceSwitchFeign", havingValue = "true")
     public RequestInterceptor requestInterceptor(TraceProperties traceProperties) {
         return new FeignDigestConfiguration(traceProperties.getAppName());
     }

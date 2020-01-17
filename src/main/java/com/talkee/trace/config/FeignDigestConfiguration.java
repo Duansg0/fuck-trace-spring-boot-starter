@@ -38,7 +38,12 @@ public class FeignDigestConfiguration implements RequestInterceptor {
     public FeignDigestConfiguration(String appName) {
         this.appName = appName;
     }
+    /**
+     * @desc Constructor
+     */
+    public FeignDigestConfiguration() {
 
+    }
     /**
      * @desc
      * @param requestTemplate
