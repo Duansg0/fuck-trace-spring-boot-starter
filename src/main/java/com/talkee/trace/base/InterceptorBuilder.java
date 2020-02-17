@@ -10,7 +10,7 @@ import org.springframework.aop.support.DefaultPointcutAdvisor;
 
 /**
  * @author Duansg
- * @desc Interceptor builder.
+ * @desc 拦截器构建
  * @date 2020-01-03 22:33:22
  */
 public class InterceptorBuilder {

@@ -7,14 +7,14 @@ import java.text.MessageFormat;
 
 /**
  * @author Duansg
- * @desc
+ * @desc Dao摘要日志数据模型
  * @date 2020-01-07 21:42:12
  */
 @Data
 public class DaoDigestModel extends DigestModel{
 
     /**
-     * @desc appName
+     * @desc 应用名称
      */
     private String appName;
 
@@ -24,7 +24,7 @@ public class DaoDigestModel extends DigestModel{
     private String url;
 
     /**
-     * Creates a new instance of DalDigestModel.
+     * @desc 有参构造.
      * @param appName
      * @param url
      * @param resultCode

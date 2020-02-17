@@ -30,8 +30,7 @@ public class TraceContainerConfiguration implements ApplicationContextAware, Sma
     }
 
     public void afterSingletonsInstantiated() {
-        //自定义拦截器配置
-        //TODO
+        //TODO 自定义拦截器配置
         try{
             Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(TraceCustom.class);
         }catch (Exception e){

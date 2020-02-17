@@ -23,7 +23,7 @@ public class TraceConstants {
     public static final String POINT_DIGEST_CHAR = " -> ";
 
     /** MVC摘要日志 */
-    public static final String MVC_DIGEST_LOG = "PV_DIGEST";
+    public static final String PV_DIGEST_LOG = "PV_DIGEST";
 
     /** mvc框架名称 */
     public static final String MVC_FRAM_NAME = "springmvc";
@@ -64,8 +64,11 @@ public class TraceConstants {
     /** 摘要日志开关*/
     public static final String DIGEST_SWITCH = "spring.boot.trace.switch";
 
-    /** 摘要日志开关(DAO-PV) */
-    public static final String DIGEST_LOG_SWITCH = "spring.boot.trace.traceSwitch";
+    /** 摘要日志开关(FEIGN) */
+    public static final String DIGEST_LOG_SWITCH_DAO = "spring.boot.trace.traceSwitch.Dao";
+
+    /** 摘要日志开关(FEIGN) */
+    public static final String DIGEST_LOG_SWITCH_PV = "spring.boot.trace.traceSwitch.Pv";
 
     /** 摘要日志开关(FEIGN) */
     public static final String DIGEST_LOG_SWITCH_FEIGN = "spring.boot.trace.traceSwitch.Feign";

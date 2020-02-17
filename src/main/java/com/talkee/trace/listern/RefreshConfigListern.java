@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 
 /**
  * @author Duansg
- * @desc
+ * @desc 热更新世界监听器。
  * @date 2020-01-08 21:32:43
  */
 public class RefreshConfigListern implements ApplicationListener<RefreshConfigModel>{
@@ -20,7 +20,6 @@ public class RefreshConfigListern implements ApplicationListener<RefreshConfigMo
     @Async
     @Override
     public void onApplicationEvent(RefreshConfigModel config) {
-        TraceUtil.setPerprotey(TraceConstants.DIGEST_LOG_SWITCH,String.valueOf(config.isTraceSwitch()));
         TraceUtil.setPerprotey(TraceConstants.DIGEST_LOG_SWITCH_FEIGN,String.valueOf(config.isTraceSwitchFeign()));
         TraceUtil.setPerprotey(TraceConstants.DIGEST_LOG_SWITCH_DUBBO,String.valueOf(config.isTraceSwitchDubbo()));
         TraceUtil.setPerprotey(TraceConstants.DIGEST_SWITCH,String.valueOf(config.isGobalSwitch()));
