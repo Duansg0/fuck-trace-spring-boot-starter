@@ -1,6 +1,7 @@
 package com.talkee.trace.model;
 
 import lombok.Data;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,9 +48,10 @@ public class TraceContext implements java.io.Serializable, Cloneable{
     }
 
     /**
-     * @desc clone
+     * @desc shallow clone
      * @desc throws RuntimeException
      */
+    @Override
     public TraceContext clone(){
         TraceContext cloneTraceContext = null;
         try {
@@ -62,9 +64,24 @@ public class TraceContext implements java.io.Serializable, Cloneable{
     }
 
     /**
+     * @desc deep clone
+     * @return
+     */
+    public TraceContext deepClone() {
+        TraceContext cloneTraceContext = null;
+        try{
+            cloneTraceContext = SerializationUtils.clone(this);
+        }catch (Throwable e){
+            throw new RuntimeException("clone TraceContext exception.", e);
+        }
+        return cloneTraceContext;
+    }
+
+    /**
      * @desc Override
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString(){
         StringBuilder builder = new StringBuilder();
         builder.append("[").append(traceId).append(",");

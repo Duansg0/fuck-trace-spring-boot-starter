@@ -35,12 +35,25 @@ public class TraceContextSupport {
     }
 
     /**
-     * @desc Clone the current unified context, deep copy
+     * @desc Clone the current unified context, shallow clone
      * @return TraceContext
      */
     public static TraceContext cloneTraceContext() {
         try {
             return UnSafeTraceContextHolder.cloneTraceContext();
+        } catch(Throwable ignore) {
+            //gitignore
+            return null;
+        }
+    }
+
+    /**
+     * @desc Clone the current unified context, deep clone
+     * @return TraceContext
+     */
+    public static TraceContext deepCloneTraceContext() {
+        try {
+            return UnSafeTraceContextHolder.deepCloneTraceContext();
         } catch(Throwable ignore) {
             //gitignore
             return null;

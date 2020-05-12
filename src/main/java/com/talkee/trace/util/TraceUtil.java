@@ -47,6 +47,14 @@ public class TraceUtil {
     }
 
     /**
+     * @desc Clone the current unified context
+     * @return
+     */
+    public static TraceContext deepCloneTraceContext() {
+        return TraceContextSupport.deepCloneTraceContext();
+    }
+
+    /**
      * @desc Sets the current unified context
      * @param traceContext
      */

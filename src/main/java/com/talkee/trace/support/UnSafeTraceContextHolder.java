@@ -1,6 +1,8 @@
 package com.talkee.trace.support;
 
 import com.talkee.trace.model.TraceContext;
+import org.apache.commons.lang3.SerializationUtils;
+
 /**
  * @author Duansg
  * @desc TraceContextSupport
@@ -29,7 +31,7 @@ public class UnSafeTraceContextHolder {
     }
 
     /**
-     * @desc Clone the current unified context, deep copy
+     * @desc Clone the current unified context, shallow clone
      * @return TraceContext
      */
     protected static TraceContext cloneTraceContext() {
@@ -37,6 +39,14 @@ public class UnSafeTraceContextHolder {
         return (traceContext != null) ? traceContext.clone() : null;
     }
 
+    /**
+     * @desc Clone the current unified context, deep clone
+     * @return TraceContext
+     */
+    protected static TraceContext deepCloneTraceContext() {
+        TraceContext traceContext = TRACE_CONTEXT.get();
+        return (traceContext != null) ? traceContext.deepClone() : null;
+    }
     /**
      *  @desc Clean up uniform context
      */
