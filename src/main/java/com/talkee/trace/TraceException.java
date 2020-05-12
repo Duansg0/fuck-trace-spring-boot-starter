@@ -4,22 +4,22 @@ import lombok.Data;
 
 /**
  * @author Duansg
- * @desc Custom exception
+ * @desc 自定义异常。
  * @date 2019-12-16 18:44:21
  */
 @Data
 public class TraceException extends RuntimeException {
 
     /**
-     * @desc Exception code.
+     * @desc 异常码.
      */
     private Integer code;
     /**
-     * @desc Describe
+     * @desc 描述信息.
      */
     private String msg;
     /**
-     * @desc There are parameter constructors.
+     * @desc 有参构造.
      * @param code
      * @param msg
      */
@@ -29,7 +29,7 @@ public class TraceException extends RuntimeException {
         this.msg = msg;
     }
     /**
-     * @desc There are parameter constructors.
+     * @desc 有参构造.
      * @param msg
      */
     public TraceException(String msg){

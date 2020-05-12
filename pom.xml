@@ -8,21 +8,14 @@
         <groupId>com.melot.planet</groupId>
         <version>1.0.0-RELEASE</version>
     </parent>
-    <groupId>com.duansg.fuck</groupId>
+    <version>1.0.0</version>
     <artifactId>fuck-trace-spring-boot-starter</artifactId>
-    <version>1.6-SNAPSHOT</version>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-core</artifactId>
-            <version>3.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>

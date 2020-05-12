@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @desc Feign摘要日志配置
  * @date 2020-01-07 22:12:03
  */
+
 @Data
 public class FeignDigestConfiguration implements RequestInterceptor {
     /**
@@ -27,7 +28,7 @@ public class FeignDigestConfiguration implements RequestInterceptor {
      */
     private static final Logger logger = LoggerFactory.getLogger(FeignDigestConfiguration.class);
     /**
-     *
+     * @desc 应用名称
      */
     private String appName;
 
@@ -51,8 +52,7 @@ public class FeignDigestConfiguration implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         try{
-            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-                    .getRequestAttributes();
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             if (TraceUtil.getPerprotey(TraceConstants.DIGEST_LOG_SWITCH_FEIGN) && !ObjectUtils.isEmpty(attributes)){
                 HttpServletRequest request = attributes.getRequest();
                 //获取请求地址

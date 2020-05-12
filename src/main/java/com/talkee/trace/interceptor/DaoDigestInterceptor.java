@@ -14,17 +14,17 @@ import org.springframework.aop.support.AopUtils;
 
 /**
  * @author Duansg
- * @desc Dao context interceptor
+ * @desc Dao摘要日志拦截器
  * @date 2019-12-31 19:46:12
  */
 @Data
 public class DaoDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor {
     /**
-     *
+     * @desc Digestdao's logger.
      */
     private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.DAO_DIGEST_LOG);
     /**
-     *
+     * @desc DaoDigestInterceptor's logger.
      */
     private static final Logger logger = LoggerFactory.getLogger(DaoDigestInterceptor.class);
 
@@ -47,7 +47,7 @@ public class DaoDigestInterceptor extends AbstractTraceInterceptor implements Me
                 DaoDigestModel daoDigestModel = new DaoDigestModel(appName, url, BoolEnum.get(isSuccess), costTime);
                 logDigest(daoDigestModel, digestLogger);
             } catch (Throwable ignore) {
-                LoggerFormatUtil.error(ignore, logger, "DaoDigestInterceptor throws an exception.");
+                LoggerFormatUtil.error(ignore, logger, "Dao摘要日志发生了一个异常。请关注!");
             }
         }
     }

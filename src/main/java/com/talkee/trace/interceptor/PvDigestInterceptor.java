@@ -20,20 +20,20 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Duansg
- * @desc SpringMvc interceptor
+ * @desc Pv摘要日志拦截器
  * @date 2020-01-02 19:13:22
  */
-public class SpringPvDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor{
+public class PvDigestInterceptor extends AbstractTraceInterceptor implements MethodInterceptor{
 
     /**
      * @desc Digestpv's logger.
      */
-    private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.MVC_DIGEST_LOG);
+    private static final Logger digestLogger = LoggerFactory.getLogger(TraceConstants.PV_DIGEST_LOG);
 
     /**
-     * @desc SpringPvDigestInterceptor's logger.
+     * @desc PvDigestInterceptor's logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger(SpringPvDigestInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(PvDigestInterceptor.class);
 
     /**
      * @desc Analyze the pressure parameters
@@ -56,6 +56,8 @@ public class SpringPvDigestInterceptor extends AbstractTraceInterceptor implemen
     public Object invoke(MethodInvocation invocation) throws Throwable {
         long startTime = System.currentTimeMillis();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //解析压测请求。
+        resolveLoadTest(request);
         boolean isSuccess = false;
         try {
             TraceInitUtil.initTraceContext();
@@ -63,13 +65,12 @@ public class SpringPvDigestInterceptor extends AbstractTraceInterceptor implemen
             isSuccess = true;
             return result;
         } finally {
-            resolveLoadTest(request);
             try {
                 long costTime = System.currentTimeMillis() - startTime;
                 PvDigestModel pvDigestModel = new PvDigestModel(request.getRequestURI(), costTime, TraceConstants.MVC_FRAM_NAME, BoolEnum.get(isSuccess), appName);
                 logDigest(pvDigestModel, digestLogger);
             } catch (Throwable ignore) {
-                LoggerFormatUtil.error(ignore, logger, "Trace pv digest log exception");
+                LoggerFormatUtil.error(ignore, logger, "PV摘要日志发生了一个异常。请关注!");
             }
             TraceUtil.clearTraceContext();
         }

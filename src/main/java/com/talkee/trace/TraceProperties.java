@@ -24,16 +24,26 @@ public class TraceProperties {
      * 3、第二个*号：表示类名，*号表示所有的类。
      * 4、*(..):最后这个星号表示方法名，*号表示所有的方法，后面括弧里面表示方法的参数，两个句点表示任何参数
      */
-    private String traceDaoExecution ;
+    private String traceDaoExecution;
     /**
      *
      */
-    private String tracePvExecution ;
+    private String tracePvExecution;
     /**
-     * @desc dao/pv开关
+     * @desc 总开关
      * @desc key:spring.boot.trace.traceSwitch
      */
-    private boolean traceSwitch = false;
+    private boolean traceSwitch = true;
+    /**
+     * @desc dao开关
+     * @desc key:spring.boot.trace.traceSwitch.Dao
+     */
+    private boolean traceSwitchDao = false;
+    /**
+     * @desc pv开关
+     * @desc key:spring.boot.trace.traceSwitch.Pv
+     */
+    private boolean traceSwitchPv = false;
     /**
      * @desc feign开关
      * @desc key:spring.boot.trace.traceSwitch.Feign
