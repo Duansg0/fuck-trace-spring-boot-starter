@@ -1,7 +1,6 @@
 package com.talkee.trace.support;
 
 import com.talkee.trace.model.TraceContext;
-import org.apache.commons.lang3.SerializationUtils;
 
 /**
  * @author Duansg
